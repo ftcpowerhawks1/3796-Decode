@@ -39,21 +39,21 @@ public class MecanumDriveCode {
         // This needs to be changed to match the orientation on your robot
         RevHubOrientationOnRobot RevOrientation = new RevHubOrientationOnRobot(
                 RevHubOrientationOnRobot.LogoFacingDirection.UP,
-                RevHubOrientationOnRobot.UsbFacingDirection.RIGHT);
+                RevHubOrientationOnRobot.UsbFacingDirection.LEFT);
 
         imu.initialize(new IMU.Parameters(RevOrientation));
     }
-
-    public void drive(double forward, double strafe, double rotate) {
+     double maxSpeed;
+    public void drive(double forward, double strafe, double rotate, double maxSpeed) {
         // This calculates the power needed for each wheel based on the amount of forward,
         // strafe right, and rotate
         double frontLeftPower = forward + strafe + rotate;
         double frontRightPower = forward - strafe - rotate;
-        double backLeftPower = forward + strafe - rotate;
-        double backRightPower = forward - strafe + rotate;
+        double backLeftPower = forward - strafe + rotate;
+        double backRightPower = forward + strafe - rotate;
 
         double maxPower = 1.0;
-        double maxSpeed = 1.0; // make this slower for outreaches
+        maxSpeed = maxSpeed; // make this slower for outreaches
 
         // This is needed to make sure we don't pass > 1.0 to any wheel
         // It allows us to keep all of the motors in proportion to what they should
@@ -72,7 +72,7 @@ public class MecanumDriveCode {
         backRightMotor.setPower(maxSpeed * (backRightPower / maxPower));
     }
 
-    public void driveFieldRelative(double forward, double strafe, double rotate) {
+    public void driveFieldRelative(double forward, double strafe, double rotate, double maxSpeed) {
         // First, convert direction being asked to drive to polar coordinates
         double theta = Math.atan2(forward, strafe);
         double r = Math.hypot(strafe, forward);
@@ -85,6 +85,6 @@ public class MecanumDriveCode {
         double newForward = r * Math.sin(theta);
         double newStrafe = r * Math.cos(theta);
 
-        this.drive(newForward, newStrafe, rotate);
+        this.drive(newForward, newStrafe, rotate, maxSpeed);
     }
 }
