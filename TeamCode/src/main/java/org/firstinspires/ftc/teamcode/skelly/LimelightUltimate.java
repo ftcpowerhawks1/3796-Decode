@@ -16,12 +16,15 @@ public class LimelightUltimate extends OpMode {
 
     @Override
     public void init() {
+        //name of limelight in driver hub
         limelight = hardwareMap.get(Limelight3A.class, "limelight");
     }
 
     @Override
     public void start() {
+        //starts the limelight (it draws alot of power)
         limelight.start();
+        //changes pipeline
         limelight.pipelineSwitch(0);
     }
 
