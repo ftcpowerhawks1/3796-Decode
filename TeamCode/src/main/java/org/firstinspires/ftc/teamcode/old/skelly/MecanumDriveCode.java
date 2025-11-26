@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.skelly;
+package org.firstinspires.ftc.teamcode.old.skelly;
 
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -13,10 +13,10 @@ public class MecanumDriveCode {
 
     public void init(HardwareMap hwMap) {
         //make sure configured correctly on hardware map
-        frontLeftMotor = hwMap.get(DcMotor.class, "frontLeftDrive");
-        frontRightMotor = hwMap.get(DcMotor.class, "frontRightDrive");
-        backLeftMotor = hwMap.get(DcMotor.class, "backLeftDrive");
-        backRightMotor = hwMap.get(DcMotor.class, "backRightDrive");
+        frontLeftMotor = hwMap.get(DcMotor.class, "frontLeft");
+        frontRightMotor = hwMap.get(DcMotor.class, "frontRight");
+        backLeftMotor = hwMap.get(DcMotor.class, "backLeft");
+        backRightMotor = hwMap.get(DcMotor.class, "backRight");
         // We set the left motors in reverse which is needed for drive trains where the left
         // motors are opposite to the right ones.
         frontLeftMotor.setDirection(DcMotor.Direction.REVERSE);
@@ -24,10 +24,10 @@ public class MecanumDriveCode {
 
         // This uses RUN_USING_ENCODER to be more accurate.   If you don't have the encoder
         // wires, you should remove these
-        frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
 
         frontLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);

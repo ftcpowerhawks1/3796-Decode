@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.skelly;
+package org.firstinspires.ftc.teamcode.old.skelly;
 
 import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.LLResultTypes;
@@ -8,7 +8,6 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import java.util.List;
 
-@TeleOp
 public class LimelightUltimate extends OpMode {
     private Limelight3A limelight;
 

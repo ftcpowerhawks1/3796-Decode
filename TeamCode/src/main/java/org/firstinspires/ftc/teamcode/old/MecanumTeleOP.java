@@ -1,13 +1,17 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.old;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.skelly.MecanumDriveCode;
+import org.firstinspires.ftc.teamcode.old.skelly.MecanumDriveCode;
+import org.firstinspires.ftc.teamcode.old.skelly.MotorCode;
 
 @TeleOp
 public class MecanumTeleOP extends OpMode {
     MecanumDriveCode drive = new MecanumDriveCode();
+    MotorCode shooter = new MotorCode();
+
+    double velocity;
 
     double forward, strafe, rotate;
     double speed = 1.0;
@@ -17,6 +21,8 @@ public class MecanumTeleOP extends OpMode {
     public void init() {
         drive.init(hardwareMap);
         telemetry.addData("Mode", "null");
+        shooter.init(hardwareMap);
+        velocity = 0;
 
     }
 
@@ -55,5 +61,20 @@ public class MecanumTeleOP extends OpMode {
                 telemetry.addData("Speed", speed);
             }
         }
+        telemetry.addData("Velocity", velocity);
+
+        if(gamepad1.right_trigger > 0.1){
+            shooter.setMotorSpeed(velocity);
+        }else{
+            shooter.setMotorSpeed(0);
+        }
+        if(gamepad1.aWasPressed()){
+            velocity += 0.1;
+        }
+
+        if(gamepad1.bWasPressed()){
+            velocity += -0.1;
+        }
     }
 }
+
