@@ -16,13 +16,13 @@ public class CHARLIEUSETHIS extends OpMode {
 
     @Override
     public void loop() {
-        if(gamepad1.y){
+        if(gamepad1.yWasPressed()){
             power += 0.1;
-        }else if(gamepad1.a){
+        }else if(gamepad1.aWasPressed()){
             power -= 0.1;
-        } else if (gamepad1.b) {
+        } else if (gamepad1.bWasPressed()) {
             power += 0.05;
-        } else if (gamepad1.x) {
+        } else if (gamepad1.xWasPressed()) {
             power -= 0.05;
         }else if(gamepad1.dpadUpWasPressed()){
             power += 0.01;
