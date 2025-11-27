@@ -32,8 +32,9 @@ public class TurnTableMotor {
 
         double txToTicks = (int) (tx / (DEGREES_PER_TICK)); //(degree)/(degree/ticks)
         motorTurn.setTargetPosition(currentPos - (int) txToTicks);
-        motorTurn.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
+        if(llResult.isValid()) {
+            motorTurn.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        }
         if (currentPos >= leftBound && currentPos <= rightBound) {
             if (txToTicks > 0) {
                 motorTurn.setPower(motorPower);

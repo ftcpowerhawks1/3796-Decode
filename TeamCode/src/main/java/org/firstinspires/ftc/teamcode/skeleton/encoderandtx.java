@@ -41,7 +41,9 @@ public class encoderandtx extends OpMode {
         telemetry.addData("Curretnt",currentPos);
         telemetry.addData("Ticks", txToTicks);
         telemetry.addData("Tx",tx);
+
         motorTurn.setTargetPosition(currentPos-(int) txToTicks);
+
     if(currentPos >= -350 && currentPos <= 350) {
         if (txToTicks > 0) {
             motorTurn.setPower(0.5);
