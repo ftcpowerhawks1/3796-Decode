@@ -17,7 +17,7 @@ public class TurnTableMotor {
     public void init(HardwareMap hwMap) {
         motorTurn = hwMap.get(DcMotor.class, "motorTurn");
         motorTurn.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motorTurn.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
         limelight = hwMap.get(Limelight3A.class, "limelight");
         limelight.setPollRateHz(100);
     }
@@ -32,22 +32,25 @@ public class TurnTableMotor {
         int currentPos = motorTurn.getCurrentPosition();
 
         double txToTicks = (int) (tx / (DEGREES_PER_TICK)); //(degree)/(degree/tick)
+        if (llResult.isValid()) {
+            motorTurn.setTargetPosition(currentPos - (int) txToTicks);
+            motorTurn.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        if (currentPos >= leftBound && currentPos <= rightBound) {
-            if (txToTicks > 0) {
-                motorTurn.setPower(motorPower);
-            } else if (txToTicks < 0) {
+            if (currentPos >= leftBound && currentPos <= rightBound) {
+                if (txToTicks > 0) {
+                    motorTurn.setPower(motorPower);
+                } else if (txToTicks < 0) {
+                    motorTurn.setPower(-motorPower);
+                }
+            } else if (currentPos > rightBound && txToTicks > 0) {
                 motorTurn.setPower(-motorPower);
+            } else if (currentPos < leftBound && txToTicks < 0) {
+                motorTurn.setPower(motorPower);
+            } else {
+                motorTurn.setPower(0);
             }
-        } else if (currentPos > rightBound && txToTicks > 0) {
-            motorTurn.setPower(-motorPower);
-        } else if (currentPos < leftBound && txToTicks < 0) {
-            motorTurn.setPower(motorPower);
-        } else {
-            motorTurn.setPower(0);
-        }
 
-        motorTurn.setTargetPosition(currentPos-(int) txToTicks);
+        }
     }
 
 

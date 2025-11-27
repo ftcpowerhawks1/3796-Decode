@@ -10,8 +10,10 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class Constants {
     //INPUT CONSTANTS HERE
+    //TODO CONFIGURE THIS mass (kilograms)
     public static FollowerConstants followerConstants = new FollowerConstants().mass(5);
     public static PathConstraints pathConstraints = new PathConstraints(0.99, 100, 1, 1);
+    //TODO CONFIGURE THESE
     public  static MecanumConstants driveConstants = new MecanumConstants().maxPower(1)
             .rightFrontMotorName("frontRight")
             .rightRearMotorName("backRight")
@@ -21,6 +23,8 @@ public class Constants {
             .leftRearMotorDirection(DcMotor.Direction.REVERSE)
             .rightFrontMotorDirection(DcMotor.Direction.FORWARD)
             .rightRearMotorDirection(DcMotor.Direction.FORWARD);
+
+
     public static Follower createFollower(HardwareMap hardwareMap) {
         return new FollowerBuilder(followerConstants, hardwareMap)
                 .pathConstraints(pathConstraints)
