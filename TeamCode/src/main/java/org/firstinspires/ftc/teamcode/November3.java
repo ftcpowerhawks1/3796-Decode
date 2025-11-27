@@ -29,8 +29,8 @@ public class November3 extends OpMode{
     public void loop() {
 //DRIVE
         double forward = gamepad1.left_stick_y;
-        double strafe = gamepad1.left_stick_x;
-        double rotate = gamepad1.right_stick_x;
+        double strafe = -gamepad1.left_stick_x;
+        double rotate = -gamepad1.right_stick_x;
         double maxSpeed = 1.0;
 
         drive.drive(forward,strafe,rotate,maxSpeed);
