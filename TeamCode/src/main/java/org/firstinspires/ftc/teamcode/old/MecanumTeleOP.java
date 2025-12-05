@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.old;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.old.skelly.MecanumDriveCode;
+import org.firstinspires.ftc.teamcode.skeleton.MecanumDriveCode;
 import org.firstinspires.ftc.teamcode.old.skelly.MotorCode;
 
 @TeleOp

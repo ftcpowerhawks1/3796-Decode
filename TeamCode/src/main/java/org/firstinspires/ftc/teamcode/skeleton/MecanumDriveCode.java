@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.old.skelly;
+package org.firstinspires.ftc.teamcode.skeleton;
 
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotor;

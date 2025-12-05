@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.old.skelly.LimelightCode;
-import org.firstinspires.ftc.teamcode.old.skelly.MecanumDriveCode;
+import org.firstinspires.ftc.teamcode.skeleton.MecanumDriveCode;
 import org.firstinspires.ftc.teamcode.old.skelly.ShooterCode;
 
 import java.util.List;
