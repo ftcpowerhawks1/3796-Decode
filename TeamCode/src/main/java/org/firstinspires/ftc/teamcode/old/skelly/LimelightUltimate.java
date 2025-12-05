@@ -72,12 +72,36 @@ public class LimelightUltimate extends OpMode {
             }
         }
 
+
+
+
+
+
+        
+
         //Retrieves the tagID from the AprilTag detected
         int tagID = -1;
         for(LLResultTypes.FiducialResult fr : fiducialResults){
             telemetry.addData("ID", "%d", fr.getFiducialId());
             tagID = fr.getFiducialId();
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     }

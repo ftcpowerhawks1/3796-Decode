@@ -27,6 +27,7 @@ public class encoderandtxahootmove extends OpMode {
 
         motorTurn.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motorTurn.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorTurn.setTargetPosition(0);
     }
 
     @Override

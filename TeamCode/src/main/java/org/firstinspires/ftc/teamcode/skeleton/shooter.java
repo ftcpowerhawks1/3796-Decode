@@ -11,21 +11,21 @@ public class shooter {
     private Limelight3A limelight;
     double calculatedVelocity = 0;
 //TODO CALCULATE CONSTANT
-    static double constant = 0.1; //Need to calculate. This takes the distance and multiplies it
+    static double constant = 0.00297705; //Need to calculate. This takes the distance and multiplies it
 
     public void init(HardwareMap hwMap){
         limelight = hwMap.get(Limelight3A.class, "limelight");
         limelight.setPollRateHz(100);
 
         motorShoot = hwMap.get(DcMotor.class, "motorShoot");
-        motorShoot.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
     public void shooterVelocity(int power){
         LLResult llResult = limelight.getLatestResult();
         double ta = llResult.getTa();
         double distanceToTag = (161.1 * Math.pow(ta, -0.5858));
-        calculatedVelocity = distanceToTag * constant;
+        calculatedVelocity = 0.438*(Math.pow(1.00126,distanceToTag));
         motorShoot.setPower(calculatedVelocity*power);
+
     }
 
 }

@@ -4,12 +4,12 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-import org.firstinspires.ftc.teamcode.skeleton.TurnTableMotor;
 import org.firstinspires.ftc.teamcode.skeleton.MecanumDriveCode;
+import org.firstinspires.ftc.teamcode.skeleton.TurnTableMotor;
 import org.firstinspires.ftc.teamcode.skeleton.shooter;
 
 @TeleOp
-public class November3 extends OpMode{
+public class November4 extends OpMode{
     TurnTableMotor turnTableMotor = new TurnTableMotor();
     MecanumDriveCode drive = new MecanumDriveCode();
     shooter shoot = new shooter();
@@ -49,7 +49,7 @@ public class November3 extends OpMode{
 //INTAKE
         if(gamepad1.left_trigger > 0.05){
             motorIntake.setPower(-1);
-        }else if(gamepad1.right_trigger > 0.05){
+        }else if(gamepad1.right_trigger > 0.05 || gamepad2.left_trigger > 0.05){
             motorIntake.setPower(1);
         }else{
             motorIntake.setPower(0);

@@ -2,16 +2,24 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.skeleton.LimeLightCode;
 
 @TeleOp
 public class CHARLIEUSETHIS extends OpMode {
     double power = 0;
+    private DcMotor motorShoot;
+    private DcMotor motorIntake;
     LimeLightCode limeLightCode = new LimeLightCode();
     @Override
     public void init() {
         limeLightCode.init(hardwareMap);
+        motorShoot = hardwareMap.get(DcMotor.class, "motorShoot");
+        motorShoot.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motorIntake = hardwareMap.get(DcMotor.class, "motorIntake");
+        motorIntake.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
     @Override
@@ -35,5 +43,7 @@ public class CHARLIEUSETHIS extends OpMode {
 
         telemetry.addData("Distance(cm)",limeLightCode.getAprilDistance());
         telemetry.addData("Power", power);
+        motorShoot.setPower(power);
+        motorIntake.setPower(gamepad1.right_trigger);
     }
 }
