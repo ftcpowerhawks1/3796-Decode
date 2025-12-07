@@ -4,12 +4,12 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-import org.firstinspires.ftc.teamcode.skeleton.TurnTableMotor;
 import org.firstinspires.ftc.teamcode.skeleton.MecanumDriveCode;
+import org.firstinspires.ftc.teamcode.skeleton.TurnTableMotor;
 import org.firstinspires.ftc.teamcode.skeleton.shooter;
 
 @TeleOp
-public class November3 extends OpMode{
+public class December1 extends OpMode{
     TurnTableMotor turnTableMotor = new TurnTableMotor();
     MecanumDriveCode drive = new MecanumDriveCode();
     shooter shoot = new shooter();
@@ -38,6 +38,19 @@ public class November3 extends OpMode{
 //TURRET
         turnTableMotor.track();
 
+        if(gamepad2.right_trigger > 0.05){
+            shoot.newShooterVelocity(1);
+        }else{
+            shoot.newShooterVelocity(0);
+        }
+
+        if(gamepad2.left_trigger > 0.05){
+            shoot.shooterVelocity(1);
+        }else{
+            shoot.shooterVelocity(0);
+        }
+
+        telemetry.addData("DISTANCE", shoot.shooterNewDistance());
 
 //SHOOTER
         if(gamepad2.right_trigger > 0.05){
@@ -45,11 +58,12 @@ public class November3 extends OpMode{
         }else{
             shoot.shooterVelocity(0);
         }
+        telemetry.addData("DISTANCE", shoot.shooterNewDistance());
 
 //INTAKE
         if(gamepad1.left_trigger > 0.05){
             motorIntake.setPower(-1);
-        }else if(gamepad1.right_trigger > 0.05){
+        }else if(gamepad1.right_trigger > 0.05 || gamepad2.left_trigger > 0.05){
             motorIntake.setPower(1);
         }else{
             motorIntake.setPower(0);

@@ -38,6 +38,13 @@ public class November4 extends OpMode{
 //TURRET
         turnTableMotor.track();
 
+        if(gamepad2.left_trigger > 0.05){
+            shoot.shooterVelocity(1);
+        }else{
+            shoot.shooterVelocity(0);
+        }
+
+        telemetry.addData("DISTANCE", shoot.shooterNewDistance());
 
 //SHOOTER
         if(gamepad2.right_trigger > 0.05){
@@ -45,6 +52,7 @@ public class November4 extends OpMode{
         }else{
             shoot.shooterVelocity(0);
         }
+        telemetry.addData("DISTANCE", shoot.shooterNewDistance());
 
 //INTAKE
         if(gamepad1.left_trigger > 0.05){

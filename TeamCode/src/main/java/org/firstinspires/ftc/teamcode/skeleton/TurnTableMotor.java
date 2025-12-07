@@ -39,8 +39,6 @@ public class TurnTableMotor {
         LLResult llResult = limelight.getLatestResult();
         List<LLResultTypes.FiducialResult> fiducialResults = llResult.getFiducialResults();
 
-        motorTurn.setTargetPosition((currentPos - (int) txToTicks));
-
         tx = llResult.getTx();
 
         currentPos = motorTurn.getCurrentPosition();
@@ -61,6 +59,8 @@ public class TurnTableMotor {
             } else {
                 motorTurn.setPower(0);
             }
+
+        motorTurn.setTargetPosition((currentPos - (int) txToTicks));
 
     }
 

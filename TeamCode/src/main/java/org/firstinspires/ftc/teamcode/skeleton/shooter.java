@@ -23,9 +23,38 @@ public class shooter {
         LLResult llResult = limelight.getLatestResult();
         double ta = llResult.getTa();
         double distanceToTag = (161.1 * Math.pow(ta, -0.5858));
-        calculatedVelocity = 0.438*(Math.pow(1.00126,distanceToTag));
+        calculatedVelocity = 0.438*(Math.pow(1.00125,distanceToTag));
         motorShoot.setPower(calculatedVelocity*power);
 
+    }
+
+    public void newShooterVelocity(int power){
+        LLResult llResult = limelight.getLatestResult();
+        calculatedVelocity = 0.438*(Math.pow(1.00125,shooterNewDistance()));
+        motorShoot.setPower(calculatedVelocity*power);
+
+    }
+    public double shooterNewDistance() {
+        LLResult llResult = limelight.getLatestResult();
+        double targetOffsetAngle_Vertical = llResult.getTy();
+
+        // how many degrees back is your limelight rotated from perfectly vertical?
+        double limelightMountAngleDegrees = 22.5;
+
+        // distance from the center of the Limelight lens to the floor
+        double limelightLensHeightInches = 12.250;
+
+        // distance from the target to the floor
+        double goalHeightInches = 29.375;
+
+        double angleToGoalDegrees = limelightMountAngleDegrees + targetOffsetAngle_Vertical;
+        double angleToGoalRadians = angleToGoalDegrees * (3.14159 / 180.0);
+
+        //calculate distance
+        double distanceFromLimelightToGoalInches = (goalHeightInches - limelightLensHeightInches) / Math.tan(angleToGoalRadians);
+        double distanceFromLimelightToGoalCentimeters = distanceFromLimelightToGoalInches * 2.54;
+
+        return distanceFromLimelightToGoalCentimeters;
     }
 
 }
