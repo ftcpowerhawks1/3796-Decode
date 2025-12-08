@@ -33,6 +33,7 @@ public class shooter {
         calculatedVelocity = 0.438*(Math.pow(1.00125,shooterNewDistance()));
         motorShoot.setPower(calculatedVelocity*power);
 
+        //Push request?
     }
     public double shooterNewDistance() {
         LLResult llResult = limelight.getLatestResult();
