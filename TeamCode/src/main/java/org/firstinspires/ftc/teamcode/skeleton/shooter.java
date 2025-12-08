@@ -27,7 +27,7 @@ public class shooter {
         motorShoot.setPower(calculatedVelocity*power);
 
     }
-
+//Pull request test
     public void newShooterVelocity(int power){
         LLResult llResult = limelight.getLatestResult();
         calculatedVelocity = 0.438*(Math.pow(1.00125,shooterNewDistance()));
