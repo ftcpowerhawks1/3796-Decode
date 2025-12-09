@@ -6,14 +6,12 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.skeleton.MecanumDriveCode;
 import org.firstinspires.ftc.teamcode.skeleton.TurnTableMotor;
-import org.firstinspires.ftc.teamcode.skeleton.shooter;
 import org.firstinspires.ftc.teamcode.skeleton.shooter2;
 
 @TeleOp
 public class December1 extends OpMode{
     TurnTableMotor turnTableMotor = new TurnTableMotor();
     MecanumDriveCode drive = new MecanumDriveCode();
-    shooter shoot = new shooter();
     shooter2 shoot2 = new shooter2();
     private DcMotor motorIntake;
 
@@ -23,7 +21,7 @@ public class December1 extends OpMode{
         motorIntake.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         drive.init(hardwareMap);
-        shoot.init(hardwareMap);
+        shoot2.init(hardwareMap);
         turnTableMotor.init(hardwareMap);
     }
 
@@ -39,7 +37,7 @@ public class December1 extends OpMode{
 
 //TURRET
         turnTableMotor.track();
-        
+
 
 //SHOOTER
         if(gamepad2.right_trigger > 0.05){
@@ -47,7 +45,6 @@ public class December1 extends OpMode{
         }else{
             shoot2.ShooterVelocity(0);
         }
-        telemetry.addData("DISTANCE", shoot.shooterNewDistance());
 
 //INTAKE
         if(gamepad1.left_trigger > 0.05){
