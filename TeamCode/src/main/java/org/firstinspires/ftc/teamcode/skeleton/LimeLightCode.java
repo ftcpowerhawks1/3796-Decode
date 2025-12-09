@@ -69,4 +69,27 @@ public class LimeLightCode {
             }
         }
     }
+
+    public double shooterNewDistance() {
+        LLResult llResult = limelight.getLatestResult();
+        double targetOffsetAngle_Vertical = llResult.getTy();
+
+        // how many degrees back is your limelight rotated from perfectly vertical?
+        double limelightMountAngleDegrees = 22.5;
+
+        // distance from the center of the Limelight lens to the floor
+        double limelightLensHeightInches = 12.250;
+
+        // distance from the target to the floor
+        double goalHeightInches = 29.375;
+
+        double angleToGoalDegrees = limelightMountAngleDegrees + targetOffsetAngle_Vertical;
+        double angleToGoalRadians = angleToGoalDegrees * (3.14159 / 180.0);
+
+        //calculate distance
+        double distanceFromLimelightToGoalInches = (goalHeightInches - limelightLensHeightInches) / Math.tan(angleToGoalRadians);
+        double distanceFromLimelightToGoalCentimeters = distanceFromLimelightToGoalInches * 2.54;
+
+        return distanceFromLimelightToGoalCentimeters;
+    }
 }

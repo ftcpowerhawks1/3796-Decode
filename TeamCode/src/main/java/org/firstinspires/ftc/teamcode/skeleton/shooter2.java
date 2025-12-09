@@ -6,35 +6,29 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 
-public class shooter {
+public class shooter2 {
     private DcMotor motorShoot;
     private Limelight3A limelight;
     double calculatedVelocity = 0;
-//TODO CALCULATE CONSTANT
-    static double constant = 0.00297705; //Need to calculate. This takes the distance and multiplies it
 
-    public void init(HardwareMap hwMap){
+    public void init(HardwareMap hwMap) {
         limelight = hwMap.get(Limelight3A.class, "limelight");
         limelight.setPollRateHz(100);
 
         motorShoot = hwMap.get(DcMotor.class, "motorShoot");
     }
-    public void shooterVelocity(int power){
-        LLResult llResult = limelight.getLatestResult();
-        double ta = llResult.getTa();
-        double distanceToTag = (161.1 * Math.pow(ta, -0.5858));
-        calculatedVelocity = 0.438*(Math.pow(1.00125,distanceToTag));
-        motorShoot.setPower(calculatedVelocity*power);
-    }
-//Pull request test
-    public void newShooterVelocity(int power){
-        LLResult llResult = limelight.getLatestResult();
-        calculatedVelocity = 0.438*(Math.pow(1.00125,shooterNewDistance()));
-        motorShoot.setPower(calculatedVelocity*power);
 
-        //Push request?
+    public void ShooterVelocity(int power){
+
+        if(Distance() > 130) {
+            calculatedVelocity= ((2.88*Math.pow(10,-6)*Math.pow(Distance(),2))-(7.87*Math.pow(10,-4)*Distance())+Math.pow(5.92,-1));
+        }else if(Distance() <= 130){
+            calculatedVelocity= ((4.25*Math.pow(10,-5)*Math.pow(Distance(),2))-(9.32*Math.pow(10,-3)*Distance())+Math.pow(9.89,-1));
+        }
+
+        motorShoot.setPower(calculatedVelocity*power);
     }
-    public double shooterNewDistance() {
+    public double Distance() {
         LLResult llResult = limelight.getLatestResult();
         double targetOffsetAngle_Vertical = llResult.getTy();
 
