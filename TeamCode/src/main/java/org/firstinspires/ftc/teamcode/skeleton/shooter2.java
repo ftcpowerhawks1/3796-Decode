@@ -49,6 +49,7 @@ public class shooter2 {
     }
     public static double powerLevel(double distance){
         double shootValue = lookupClosest(distance,distances,powers);
+        return shootValue;
     }
     public static double lookupClosest(double input, int[] distances, double[] powers) {
 
