@@ -37,7 +37,8 @@ public class December1 extends OpMode{
 
 //TURRET
         turnTableMotor.track();
-
+        telemetry.addData("Dist",shoot2.distance());
+        telemetry.addData("Power", shoot2.powerLevel(shoot2.distance()));
 
 //SHOOTER
         if(gamepad2.right_trigger > 0.05){
