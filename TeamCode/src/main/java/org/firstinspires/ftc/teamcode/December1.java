@@ -13,6 +13,8 @@ public class December1 extends OpMode{
     TurnTableMotor turnTableMotor = new TurnTableMotor();
     MecanumDriveCode drive = new MecanumDriveCode();
     shooter2 shoot2 = new shooter2();
+
+
     private DcMotor motorIntake;
 
     @Override
@@ -23,6 +25,7 @@ public class December1 extends OpMode{
         drive.init(hardwareMap);
         shoot2.init(hardwareMap);
         turnTableMotor.init(hardwareMap);
+
     }
 
     @Override

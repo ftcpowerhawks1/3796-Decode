@@ -15,6 +15,7 @@ public class shooter2 {
     public void init(HardwareMap hwMap) {
         limelight = hwMap.get(Limelight3A.class, "limelight");
         limelight.setPollRateHz(100);
+        limelight.pipelineSwitch(2);
 
         motorShoot = hwMap.get(DcMotor.class, "motorShoot");
         motorShoot.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
