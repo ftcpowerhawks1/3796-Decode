@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.skeleton;
+9-10-24package org.firstinspires.ftc.teamcode.skeleton;
 
 import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.LLResultTypes;
@@ -63,18 +63,17 @@ public class TurnTableMotor {
             motorTurn.setPower(0);
 
         }
-if(llResult.valid!=){
+if(!llResult.valid){
 lastTime = System.nanoTime();
 
 if(lastTime >= (10 * Math.pow(10, 9))){
 
  if (currentPos > 0) {
-            motorTurn.setPower(motorPower);
-            motorTurn.setTargetPosition(0);
+     motorTurn.setTargetPosition(0);       motorTurn.setPower(motorPower);
+            
         } else if (currentPos < 0) {
-            motorTurn.setPower(-motorPower);
-            motorTurn.setTargetPosition(0);
-}
+        motorTurn.setTargetPosition(0);    motorTurn.setPower(-motorPower);
+            }
         
 }
 }
