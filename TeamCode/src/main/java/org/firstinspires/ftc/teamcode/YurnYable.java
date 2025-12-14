@@ -22,7 +22,8 @@ public class YurnYable {
     double TICKS_PER_REV = 2150.8; //19.2:1 Motor
     double DEGREES_PER_TICK = 360 / TICKS_PER_REV; //19.2:1 Motor
     int currentPos = 0;
-    long lastTime = 0;
+    double seconds = 0;
+
 
     public void init(HardwareMap hwMap) {
         limelight = hwMap.get(Limelight3A.class, "limelight");
@@ -58,26 +59,30 @@ public class YurnYable {
             motorTurn.setPower(motorPower);
         } else {
             motorTurn.setPower(0);
-
         }
-        if(!llResult.isValid()){
-            lastTime = System.nanoTime();
-            Timer timerP = new Timer();
 
+        if (!llResult.isValid() && motorTurn.getPower() == 0) {
+            Timer timer = new Timer();
+            seconds = timer.getElapsedTimeSeconds();
 
-            if(lastTime >= (10 * Math.pow(10, 9))){
+            if (seconds > 10) {
 
                 if (currentPos > 0) {
                     motorTurn.setTargetPosition(0);
                     motorTurn.setPower(motorPower);
+                    timer.resetTimer();
+                    seconds = 0;
 
                 } else if (currentPos < 0) {
                     motorTurn.setTargetPosition(0);
                     motorTurn.setPower(-motorPower);
+                    timer.resetTimer();
+                    seconds = 0;
                 }
 
             }
         }
+
         motorTurn.setTargetPosition((currentPos - (int) txToTicks));
 
     }
