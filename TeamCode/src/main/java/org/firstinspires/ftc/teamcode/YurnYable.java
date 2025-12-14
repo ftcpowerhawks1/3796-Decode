@@ -46,21 +46,6 @@ public class YurnYable {
 
         txToTicks = (int) (tx / (DEGREES_PER_TICK)); //(degree)/(degree/ticks)
 
-        if (currentPos >= leftBound && currentPos <= rightBound) {
-            if (txToTicks > 0) {
-                motorTurn.setPower(motorPower);
-            } else if (txToTicks < 0) {
-                motorTurn.setPower(-motorPower);
-            }
-
-        } else if (currentPos > rightBound && txToTicks > 0) {
-            motorTurn.setPower(-motorPower);
-        } else if (currentPos < leftBound && txToTicks < 0) {
-            motorTurn.setPower(motorPower);
-        } else {
-            motorTurn.setPower(0);
-        }
-
         if (!llResult.isValid() && motorTurn.getPower() == 0) {
             Timer timer = new Timer();
             seconds = timer.getElapsedTimeSeconds();
@@ -81,7 +66,23 @@ public class YurnYable {
                 }
 
             }
+        }else if (currentPos >= leftBound && currentPos <= rightBound) {
+            if (txToTicks > 0) {
+                motorTurn.setPower(motorPower);
+            } else if (txToTicks < 0) {
+                motorTurn.setPower(-motorPower);
+            }
+
+        } else if (currentPos > rightBound && txToTicks > 0) {
+            motorTurn.setPower(-motorPower);
+        } else if (currentPos < leftBound && txToTicks < 0) {
+            motorTurn.setPower(motorPower);
+        } else {
+            motorTurn.setPower(0);
+
         }
+
+
 
         motorTurn.setTargetPosition((currentPos - (int) txToTicks));
 
