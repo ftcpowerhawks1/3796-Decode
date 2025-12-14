@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 
-public class ZurnZable {
+public class XurnXable {
     private Limelight3A limelight;
     private DcMotor motorTurn;
     double txToTicks = 0;
@@ -35,46 +35,63 @@ public class ZurnZable {
         motorTurn.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
     }
+/*if(seconds > 10){
+                if (currentPos > 0) {
+                    motorTurn.setTargetPosition(0);
+                    motorTurn.setPower(motorPower);
+                    timer.resetTimer();
+                    seconds = 0;
+
+                } else if (currentPos < 0) {
+                    motorTurn.setTargetPosition(0);
+                    motorTurn.setPower(-motorPower);
+                    timer.resetTimer();
+                    seconds = 0;
+                }
+            }
+
+    */
+
+
 
     public void track() {
         LLResult llResult = limelight.getLatestResult();
-        if (llResult.isValid()) {
-            tx = llResult.getTx();
-            currentPos = motorTurn.getCurrentPosition();
-            txToTicks = (int) (tx / (DEGREES_PER_TICK)); //(degree)/(degree/ticks)
-            motorTurn.setTargetPosition((currentPos - (int) txToTicks));
+        tx = llResult.getTx();
 
-            if (currentPos >= leftBound && currentPos <= rightBound) {
-                if (txToTicks > 0) {
-                    motorTurn.setPower(motorPower);
-                } else if (txToTicks < 0) {
-                    motorTurn.setPower(-motorPower);
-                }
-            } else if (currentPos > rightBound && txToTicks > 0) {
-                motorTurn.setPower(-motorPower);
-            } else if (currentPos < leftBound && txToTicks < 0) {
+        currentPos = motorTurn.getCurrentPosition();
+
+        txToTicks = (int) (tx / (DEGREES_PER_TICK)); //(degree)/(degree/ticks)
+
+        if (currentPos >= leftBound && currentPos <= rightBound) {
+            if (txToTicks > 0) {
                 motorTurn.setPower(motorPower);
-            } else {
-                motorTurn.setPower(0);
+            } else if (txToTicks < 0) {
+                motorTurn.setPower(-motorPower);
             }
 
-        } else if (!llResult.isValid()) {
+        } else if (currentPos > rightBound && txToTicks > 0) {
+            motorTurn.setPower(-motorPower);
+        } else if (currentPos < leftBound && txToTicks < 0) {
+            motorTurn.setPower(motorPower);
+        } else {
+            motorTurn.setPower(0);
             scan();
         }
-    }
 
-    private void scan() {
+
+
+    }
+    private void scan(){
         LLResult llResult = limelight.getLatestResult();
-        while (!llResult.isValid()) {
-            if (!llResult.isValid()) {
-                motorTurn.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-                if (currentPos > rightBound) {
-                    motorTurn.setPower(-0.3);
-                } else if (currentPos < leftBound) {
-                    motorTurn.setPower(0.3);
-                }
-            } else if (llResult.isValid()) {
-                motorTurn.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        while(!llResult.isValid()) {
+            if (currentPos > rightBound) {
+                motorTurn.setPower(-0.3);
+                motorTurn.setTargetPosition(leftBound);
+            } else if (currentPos < leftBound) {
+                motorTurn.setPower(0.3);
+                motorTurn.setTargetPosition(rightBound);
+            }
+            if (llResult.isValid()) {
                 motorTurn.setTargetPosition((currentPos - (int) txToTicks));
                 break;
             }

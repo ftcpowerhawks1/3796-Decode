@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
+import org.firstinspires.ftc.teamcode.XurnXable;
 import org.firstinspires.ftc.teamcode.YurnYable;
 import org.firstinspires.ftc.teamcode.ZurnZable;
 import org.firstinspires.ftc.teamcode.skeleton.MecanumDriveCode;
@@ -11,7 +12,7 @@ import org.firstinspires.ftc.teamcode.skeleton.TurnTableMotor;
 
 @TeleOp
 public class YURNWORKING extends OpMode{
-    ZurnZable turnTableMotor = new ZurnZable();
+    XurnXable turnTableMotor = new XurnXable();
     MecanumDriveCode drive = new MecanumDriveCode();
     shooterCOMP shoot = new shooterCOMP();
 
