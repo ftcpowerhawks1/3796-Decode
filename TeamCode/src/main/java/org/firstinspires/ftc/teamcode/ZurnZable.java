@@ -38,32 +38,33 @@ public class ZurnZable {
 
     public void track() {
         LLResult llResult = limelight.getLatestResult();
-        tx = llResult.getTx();
-        currentPos = motorTurn.getCurrentPosition();
-        txToTicks = (int) (tx / (DEGREES_PER_TICK)); //(degree)/(degree/ticks)
-        if(llResult.isValid()){
+        if (llResult.isValid()) {
+            tx = llResult.getTx();
+            currentPos = motorTurn.getCurrentPosition();
+            txToTicks = (int) (tx / (DEGREES_PER_TICK)); //(degree)/(degree/ticks)
             motorTurn.setTargetPosition((currentPos - (int) txToTicks));
-            if (currentPos >= leftBound && currentPos <= rightBound){
+            if (currentPos >= leftBound && currentPos <= rightBound) {
                 if (txToTicks > 0) {
                     motorTurn.setPower(motorPower);
                 } else if (txToTicks < 0) {
                     motorTurn.setPower(-motorPower);
                 }
-            }else if (currentPos > rightBound && txToTicks > 0) {
+            } else if (currentPos > rightBound && txToTicks > 0) {
                 motorTurn.setPower(-motorPower);
             } else if (currentPos < leftBound && txToTicks < 0) {
                 motorTurn.setPower(motorPower);
-            }else{
+            } else {
                 motorTurn.setPower(0);
             }
 
-        }else if(!llResult.isValid()){
+        } else if (!llResult.isValid()) {
             scan();
         }
     }
-    private void scan(){
+
+    private void scan() {
         LLResult llResult = limelight.getLatestResult();
-        while(!llResult.isValid()) {
+        while (!llResult.isValid()) {
             if (!llResult.isValid()) {
                 motorTurn.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
                 if (currentPos > rightBound) {
