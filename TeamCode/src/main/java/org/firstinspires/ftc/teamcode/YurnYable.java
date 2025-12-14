@@ -24,6 +24,8 @@ public class YurnYable {
     int currentPos = 0;
     double seconds = 0;
 
+    Timer timer = new Timer();
+
 
     public void init(HardwareMap hwMap) {
         limelight = hwMap.get(Limelight3A.class, "limelight");
@@ -36,22 +38,7 @@ public class YurnYable {
         motorTurn.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
     }
-
-    public void track() {
-        LLResult llResult = limelight.getLatestResult();
-
-        tx = llResult.getTx();
-
-        currentPos = motorTurn.getCurrentPosition();
-
-        txToTicks = (int) (tx / (DEGREES_PER_TICK)); //(degree)/(degree/ticks)
-
-        if (!llResult.isValid() && motorTurn.getPower() == 0) {
-            Timer timer = new Timer();
-            seconds = timer.getElapsedTimeSeconds();
-
-            if (seconds > 10) {
-
+/*if(seconds > 10){
                 if (currentPos > 0) {
                     motorTurn.setTargetPosition(0);
                     motorTurn.setPower(motorPower);
@@ -64,9 +51,21 @@ public class YurnYable {
                     timer.resetTimer();
                     seconds = 0;
                 }
-
             }
-        }else if (currentPos >= leftBound && currentPos <= rightBound) {
+
+    */
+
+
+
+    public void track() {
+        LLResult llResult = limelight.getLatestResult();
+        tx = llResult.getTx();
+
+        currentPos = motorTurn.getCurrentPosition();
+
+        txToTicks = (int) (tx / (DEGREES_PER_TICK)); //(degree)/(degree/ticks)
+
+        if (currentPos >= leftBound && currentPos <= rightBound) {
             if (txToTicks > 0) {
                 motorTurn.setPower(motorPower);
             } else if (txToTicks < 0) {
@@ -79,13 +78,29 @@ public class YurnYable {
             motorTurn.setPower(motorPower);
         } else {
             motorTurn.setPower(0);
-
+            scan();
         }
-
-
 
         motorTurn.setTargetPosition((currentPos - (int) txToTicks));
 
     }
-
+    private void scan(){
+        LLResult llResult = limelight.getLatestResult();
+        if(!llResult.isValid()){
+            motorTurn.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            if (currentPos > rightBound) {
+                    motorTurn.setPower(-0.3);
+                } else if (currentPos < leftBound) {
+                    motorTurn.setPower(0.3);
+                }
+        }else if(llResult.isValid()){
+            motorTurn.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            motorTurn.setTargetPosition((currentPos - (int) txToTicks));
+            if (currentPos > rightBound) {
+                motorTurn.setPower(-motorPower);
+            } else if (currentPos < leftBound) {
+                motorTurn.setPower(motorPower);
+            }
+        }
+    }
 }
