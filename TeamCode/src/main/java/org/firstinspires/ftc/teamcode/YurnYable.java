@@ -1,5 +1,6 @@
-package org.firstinspires.ftc.teamcode.skeleton;
+package org.firstinspires.ftc.teamcode;
 
+import com.pedropathing.util.Timer;
 import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.LLResultTypes;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
@@ -7,10 +8,9 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import java.util.List;
-import java.util.Timer;
 
 
-public class TurnTableMotor {
+public class YurnYable {
     private Limelight3A limelight;
     private DcMotor motorTurn;
     double txToTicks = 0;
@@ -22,7 +22,7 @@ public class TurnTableMotor {
     double TICKS_PER_REV = 2150.8; //19.2:1 Motor
     double DEGREES_PER_TICK = 360 / TICKS_PER_REV; //19.2:1 Motor
     int currentPos = 0;
-    long lastTime = 0
+    long lastTime = 0;
 
     public void init(HardwareMap hwMap) {
         limelight = hwMap.get(Limelight3A.class, "limelight");
@@ -48,35 +48,36 @@ public class TurnTableMotor {
         if (currentPos >= leftBound && currentPos <= rightBound) {
             if (txToTicks > 0) {
                 motorTurn.setPower(motorPower);
-                lastTime = 0;
             } else if (txToTicks < 0) {
                 motorTurn.setPower(-motorPower);
-                lastTime = 0;
             }
+
         } else if (currentPos > rightBound && txToTicks > 0) {
             motorTurn.setPower(-motorPower);
-            lastTime = 0;
         } else if (currentPos < leftBound && txToTicks < 0) {
             motorTurn.setPower(motorPower);
-            lastTime = 0;
         } else {
             motorTurn.setPower(0);
 
         }
-if(!llResult.valid){
-lastTime = System.nanoTime();
+        if(!llResult.isValid()){
+            lastTime = System.nanoTime();
+            Timer timerP = new Timer();
 
-if(lastTime >= (10 * Math.pow(10, 9))){
 
- if (currentPos > 0) {
-     motorTurn.setTargetPosition(0);       motorTurn.setPower(motorPower);
+            if(lastTime >= (10 * Math.pow(10, 9))){
 
-        } else if (currentPos < 0) {
-        motorTurn.setTargetPosition(0);    motorTurn.setPower(-motorPower);
+                if (currentPos > 0) {
+                    motorTurn.setTargetPosition(0);
+                    motorTurn.setPower(motorPower);
+
+                } else if (currentPos < 0) {
+                    motorTurn.setTargetPosition(0);
+                    motorTurn.setPower(-motorPower);
+                }
+
             }
-
-}
-}
+        }
         motorTurn.setTargetPosition((currentPos - (int) txToTicks));
 
     }

@@ -94,7 +94,6 @@ public class tryAgain extends OpMode {
     public void start(){
         opModeTimer.resetTimer();
         setPathState(pathState);
-        moto
     }
 
     @Override

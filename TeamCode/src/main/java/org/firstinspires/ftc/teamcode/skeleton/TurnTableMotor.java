@@ -1,4 +1,5 @@
-9-10-24package org.firstinspires.ftc.teamcode.skeleton;
+package org.firstinspires.ftc.teamcode.skeleton;
+
 
 import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.LLResultTypes;
@@ -21,7 +22,7 @@ public class TurnTableMotor {
     double TICKS_PER_REV = 2150.8; //19.2:1 Motor
     double DEGREES_PER_TICK = 360 / TICKS_PER_REV; //19.2:1 Motor
     int currentPos = 0;
-    
+
 
     public void init(HardwareMap hwMap) {
         limelight = hwMap.get(Limelight3A.class, "limelight");
@@ -47,22 +48,18 @@ public class TurnTableMotor {
         if (currentPos >= leftBound && currentPos <= rightBound) {
             if (txToTicks > 0) {
                 motorTurn.setPower(motorPower);
-                lastTime = 0;
             } else if (txToTicks < 0) {
                 motorTurn.setPower(-motorPower);
-                lastTime = 0;
             }
         } else if (currentPos > rightBound && txToTicks > 0) {
             motorTurn.setPower(-motorPower);
-            lastTime = 0;
         } else if (currentPos < leftBound && txToTicks < 0) {
             motorTurn.setPower(motorPower);
-            lastTime = 0;
         } else {
             motorTurn.setPower(0);
 
         }
-}
+
         motorTurn.setTargetPosition((currentPos - (int) txToTicks));
 
     }
