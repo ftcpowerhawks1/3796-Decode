@@ -31,7 +31,7 @@ public class REDdecember extends OpMode{
     @Override
     public void loop() {
 //DRIVE
-        double forward = gamepad1.left_stick_y;
+        double forward = -gamepad1.left_stick_y;
         double strafe = gamepad1.left_stick_x;
         double rotate = gamepad1.right_stick_x;
         double maxSpeed = 1.0;
