@@ -21,17 +21,27 @@ public class tryAgain extends OpMode {
 
     public enum PathState{
         DRIVE_STARTPOS_SHOOT_POS,
+        DRIVE_SHOOT_POS_OTHER_POS,
         SHOOT_PRELOAD
     }
     PathState pathState;
-    private final Pose startPose = new Pose(72, 72, Math.toRadians(0));
-    private final Pose shootPose = new Pose(72, 20, Math.toRadians(0));
-    private PathChain driveStartPosShootPos;
+    private final Pose startPose = new Pose(60, 9, Math.toRadians(90));
+    private final Pose shootPose = new Pose(35, 60, Math.toRadians(180));
+    private final Pose otherPose = new Pose(84.5, 60, Math.toRadians(0));
+    private PathChain driveStartPosShootPos, driveShootPosOtherPos;
 
     public void buildPaths(){
         driveStartPosShootPos = follower.pathBuilder()
                 .addPath(new BezierLine(startPose, shootPose))
                 .setLinearHeadingInterpolation(startPose.getHeading(), shootPose.getHeading())
+                .build();
+        driveShootPosOtherPos = follower.pathBuilder()
+                .addPath(new BezierLine(shootPose, otherPose))
+                .setLinearHeadingInterpolation(shootPose.getHeading(), otherPose.getHeading())
+                .build();
+        driveShootPosOtherPos = follower.pathBuilder()
+                .addPath(new BezierLine(shootPose, otherPose))
+                .setLinearHeadingInterpolation(shootPose.getHeading(), otherPose.getHeading())
                 .build();
     }
     public void statePathUpdate(){
@@ -39,13 +49,12 @@ public class tryAgain extends OpMode {
             case DRIVE_STARTPOS_SHOOT_POS:
                 follower.followPath(driveStartPosShootPos, true);
                 pathState = PathState.SHOOT_PRELOAD;
-                turnTableMotor.track();
-                telemetry.addData("Dist",shoot2.distance());
-                telemetry.addData("Power", shooter2.powerLevel(shoot2.distance()));
-                shoot2.ShooterVelocity(1);
+                break;
+            case DRIVE_SHOOT_POS_OTHER_POS:
+                telemetry.addLine("idk what to put here");
                 break;
             case SHOOT_PRELOAD:
-                if(!follower.isBusy() && pathTimer.getElapsedTimeSeconds() > 25){
+                if(!follower.isBusy()){
                     telemetry.addLine("Done Path");
                 }
                 break;
@@ -60,6 +69,7 @@ public class tryAgain extends OpMode {
     }
     @Override
     public void init() {
+        follower.setStartingPose(new Pose(60, 9, Math.toRadians(90)));
         pathState = PathState.DRIVE_STARTPOS_SHOOT_POS;
         pathTimer = new Timer();
         opModeTimer = new Timer();
