@@ -19,8 +19,8 @@ public class MecanumDriveCode {
         backRightMotor = hwMap.get(DcMotor.class, "backRight");
         // We set the left motors in reverse which is needed for drive trains where the left
         // motors are opposite to the right ones.
-        frontLeftMotor.setDirection(DcMotor.Direction.REVERSE);
-        backLeftMotor.setDirection(DcMotor.Direction.REVERSE);
+        frontRightMotor.setDirection(DcMotor.Direction.REVERSE);
+        backRightMotor.setDirection(DcMotor.Direction.REVERSE);
 
         // This uses RUN_USING_ENCODER to be more accurate.   If you don't have the encoder
         // wires, you should remove these

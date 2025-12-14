@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import java.util.List;
+import java.util.Timer;
 
 
 public class TurnTableMotor {
@@ -17,16 +18,16 @@ public class TurnTableMotor {
 
     int leftBound = -350; //Units:Ticks
     int rightBound = 350; //Units:Ticks
-    double motorPower = 0.7;
+    double motorPower = 0.5;
     double TICKS_PER_REV = 2150.8; //19.2:1 Motor
     double DEGREES_PER_TICK = 360 / TICKS_PER_REV; //19.2:1 Motor
     int currentPos = 0;
+    long lastTime = System.nanoTime();
 
     public void init(HardwareMap hwMap) {
         limelight = hwMap.get(Limelight3A.class, "limelight");
         limelight.setPollRateHz(100);
         limelight.start();
-
 
         motorTurn = hwMap.get(DcMotor.class, "motorTurn");
         motorTurn.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -47,15 +48,26 @@ public class TurnTableMotor {
         if (currentPos >= leftBound && currentPos <= rightBound) {
             if (txToTicks > 0) {
                 motorTurn.setPower(motorPower);
+                lastTime = System.nanoTime();
             } else if (txToTicks < 0) {
                 motorTurn.setPower(-motorPower);
+                lastTime = System.nanoTime();
             }
         } else if (currentPos > rightBound && txToTicks > 0) {
             motorTurn.setPower(-motorPower);
+            lastTime = System.nanoTime();
         } else if (currentPos < leftBound && txToTicks < 0) {
             motorTurn.setPower(motorPower);
+            lastTime = System.nanoTime();
+        } else if (currentPos > 0 && lastTime >= (3 * Math.pow(10, -9))) {
+            motorTurn.setPower(motorPower);
+            motorTurn.setTargetPosition(0);
+        } else if (currentPos < 0 && lastTime >= (3 * Math.pow(10, -9))) {
+            motorTurn.setPower(-motorPower);
+            motorTurn.setTargetPosition(0);
         } else {
             motorTurn.setPower(0);
+
         }
 
         motorTurn.setTargetPosition((currentPos - (int) txToTicks));

@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 import java.util.List;
 
-@TeleOp
+//TeleOp
 public class encoderandtxahootmove extends OpMode {
     private Limelight3A limelight;
     private DcMotor motorTurn,motorShoot,motorIntake;

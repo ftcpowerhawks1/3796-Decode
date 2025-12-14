@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.old.skelly.MotorCode;
 
-@TeleOp
+//@TeleOp
 public class ShooterButtonVariable extends OpMode {
     MotorCode shooter = new MotorCode();
 

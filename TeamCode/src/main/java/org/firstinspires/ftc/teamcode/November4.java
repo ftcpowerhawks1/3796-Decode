@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.skeleton.MecanumDriveCode;
 import org.firstinspires.ftc.teamcode.skeleton.TurnTableMotor;
 import org.firstinspires.ftc.teamcode.skeleton.shooter;
 
-@TeleOp
+//@TeleOp
 public class November4 extends OpMode{
     TurnTableMotor turnTableMotor = new TurnTableMotor();
     MecanumDriveCode drive = new MecanumDriveCode();

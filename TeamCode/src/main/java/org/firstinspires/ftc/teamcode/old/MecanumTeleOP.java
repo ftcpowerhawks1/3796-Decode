@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.skeleton.MecanumDriveCode;
 import org.firstinspires.ftc.teamcode.old.skelly.MotorCode;
 
-@TeleOp
+//@TeleOp
 public class MecanumTeleOP extends OpMode {
     MecanumDriveCode drive = new MecanumDriveCode();
     MotorCode shooter = new MotorCode();

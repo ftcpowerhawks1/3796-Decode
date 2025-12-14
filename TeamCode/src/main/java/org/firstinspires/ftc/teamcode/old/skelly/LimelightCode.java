@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import java.util.List;
-@Config
+//@Config
 public class LimelightCode {
     //DO NOT CHANGE THESE PID VALUES FOR THE TURRET UNDER ANY COST
     public static double p = 0.0;

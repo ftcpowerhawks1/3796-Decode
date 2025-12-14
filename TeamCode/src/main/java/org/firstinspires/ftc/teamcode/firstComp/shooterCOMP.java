@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.skeleton;
+package org.firstinspires.ftc.teamcode.firstComp;
 
 import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
@@ -6,23 +6,25 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 
-public class shooter2 {
+public class shooterCOMP {
     private DcMotor motorShoot;
     private Limelight3A limelight;
     static int[] distances = {65, 70, 80, 85, 95, 100, 120, 155, 185, 190, 215, 220, 305, 325, 360, 365};
     static double[] powers = {0.57, 0.54, 0.51, 0.5, 0.49, 0.49, 0.48, 0.53, 0.56, 0.55, 0.56, 0.57, 0.61, 0.63, 0.67, 0.71};
 
-    public void init(HardwareMap hwMap) {
+    double shootValue = 0;
+
+    public void init(HardwareMap hwMap,int mode) {
         limelight = hwMap.get(Limelight3A.class, "limelight");
         limelight.setPollRateHz(100);
-        limelight.pipelineSwitch(1);
+        limelight.pipelineSwitch(mode);
 
         motorShoot = hwMap.get(DcMotor.class, "motorShoot");
         motorShoot.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 
     public void ShooterVelocity(int power) {
-        double shootValue = lookupClosest(distance(),distances,powers);
+        shootValue = lookupClosest(distance(),distances,powers);
         motorShoot.setPower(shootValue*power);
     }
 
@@ -48,8 +50,7 @@ public class shooter2 {
 
         return distanceFromLimelightToGoalCentimeters;
     }
-    public static double powerLevel(double distance){
-        double shootValue = lookupClosest(distance,distances,powers);
+    public double getShootValue(){
         return shootValue;
     }
     public static double lookupClosest(double input, int[] distances, double[] powers) {

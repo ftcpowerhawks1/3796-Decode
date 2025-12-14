@@ -15,7 +15,7 @@ import org.firstinspires.ftc.teamcode.skeleton.shooter;
 
 import java.util.List;
 
-@TeleOp
+//@TeleOp
 public class November2 extends OpMode {
     ShooterCode shoot = new ShooterCode();
     double shootSpeed = 0.00;

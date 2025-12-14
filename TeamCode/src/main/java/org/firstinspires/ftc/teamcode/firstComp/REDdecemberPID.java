@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.firstComp;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -6,13 +6,13 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.skeleton.MecanumDriveCode;
 import org.firstinspires.ftc.teamcode.skeleton.TurnTableMotor;
-import org.firstinspires.ftc.teamcode.skeleton.shooter2;
+import org.firstinspires.ftc.teamcode.skeleton.shooterPID;
 
 //@TeleOp
-public class December1 extends OpMode{
+public class REDdecemberPID extends OpMode{
     TurnTableMotor turnTableMotor = new TurnTableMotor();
     MecanumDriveCode drive = new MecanumDriveCode();
-    shooter2 shoot2 = new shooter2();
+    shooterPID shoot = new shooterPID();
 
 
     private DcMotor motorIntake;
@@ -20,34 +20,38 @@ public class December1 extends OpMode{
     @Override
     public void init() {
         motorIntake = hardwareMap.get(DcMotor.class, "motorIntake");
-        motorIntake.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         drive.init(hardwareMap);
-        shoot2.init(hardwareMap);
-        turnTableMotor.init(hardwareMap);
 
+        //MODE = 1 BLUE || MODE = 2 RED
+        shoot.init(hardwareMap,2);
+
+        turnTableMotor.init(hardwareMap);
     }
 
     @Override
     public void loop() {
 //DRIVE
         double forward = gamepad1.left_stick_y;
-        double strafe = -gamepad1.left_stick_x;
-        double rotate = -gamepad1.right_stick_x;
+        double strafe = gamepad1.left_stick_x;
+        double rotate = gamepad1.right_stick_x;
         double maxSpeed = 1.0;
 
         drive.drive(forward,strafe,rotate,maxSpeed);
 
 //TURRET
         turnTableMotor.track();
-        telemetry.addData("Dist",shoot2.distance());
-        telemetry.addData("Power", shoot2.powerLevel(shoot2.distance()));
+
+        telemetry.addData("Distance (cm)",shoot.distance());
+
+        telemetry.addData("Power Target", shoot.getShootValue());
+        telemetry.addData("Power PID", shoot.getPidShoot());
 
 //SHOOTER
         if(gamepad2.right_trigger > 0.05){
-            shoot2.ShooterVelocity(1);
+            shoot.ShooterVelocity(1);
         }else{
-            shoot2.ShooterVelocity(0);
+            shoot.ShooterVelocity(0);
         }
 
 //INTAKE
