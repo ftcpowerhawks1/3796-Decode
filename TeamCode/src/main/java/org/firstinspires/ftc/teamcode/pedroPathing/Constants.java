@@ -19,34 +19,34 @@ public class Constants {
     public static FollowerConstants followerConstants = new FollowerConstants().mass(9.797595);
     public static PathConstraints pathConstraints = new PathConstraints(0.99, 100, 1, 1);
 
-    public  static MecanumConstants driveConstants = new MecanumConstants().maxPower(1)
+    public  static MecanumConstants driveConstants = new MecanumConstants()
+            .maxPower(0.5)
             .rightFrontMotorName("frontRight")
             .rightRearMotorName("backRight")
             .leftRearMotorName("backLeft")
             .leftFrontMotorName("frontLeft")
-            .leftFrontMotorDirection(DcMotor.Direction.REVERSE)
-            .leftRearMotorDirection(DcMotor.Direction.REVERSE)
-            .rightFrontMotorDirection(DcMotor.Direction.FORWARD)
-            .rightRearMotorDirection(DcMotor.Direction.FORWARD);
-
+            .leftFrontMotorDirection(DcMotor.Direction.FORWARD)
+            .leftRearMotorDirection(DcMotor.Direction.FORWARD)
+            .rightFrontMotorDirection(DcMotor.Direction.REVERSE)
+            .rightRearMotorDirection(DcMotor.Direction.REVERSE)
+            .xVelocity(24.45479424904651)
+            .yVelocity(17.611395527997356);
 
     public static Follower createFollower(HardwareMap hardwareMap) {
         return new FollowerBuilder(followerConstants, hardwareMap)
-                //KEEP VVVV
                 .pinpointLocalizer(localizerConstants)
                 .pathConstraints(pathConstraints)
                 .mecanumDrivetrain(driveConstants)
-                //KEEP VVV
                 .build();
     }
 
     public static PinpointConstants localizerConstants = new PinpointConstants()
-            .forwardPodY(-5)
-            .strafePodX(0.5)
+            .forwardPodY(-2.625)
+            .strafePodX(-6.625)
             .distanceUnit(DistanceUnit.INCH)
             .hardwareMapName("pinpoint")
             .encoderResolution(GoBildaPinpointDriver.GoBildaOdometryPods.goBILDA_4_BAR_POD)
             .forwardEncoderDirection(GoBildaPinpointDriver.EncoderDirection.FORWARD)
-            .strafeEncoderDirection(GoBildaPinpointDriver.EncoderDirection.FORWARD);
+            .strafeEncoderDirection(GoBildaPinpointDriver.EncoderDirection.REVERSED);
 
 }
