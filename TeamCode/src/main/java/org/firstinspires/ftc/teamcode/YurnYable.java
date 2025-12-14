@@ -86,20 +86,18 @@ public class YurnYable {
     }
     private void scan(){
         LLResult llResult = limelight.getLatestResult();
-        if(!llResult.isValid()){
-            motorTurn.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-            if (currentPos > rightBound) {
+        while(!llResult.isValid()) {
+            if (!llResult.isValid()) {
+                motorTurn.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                if (currentPos > rightBound) {
                     motorTurn.setPower(-0.3);
                 } else if (currentPos < leftBound) {
                     motorTurn.setPower(0.3);
                 }
-        }else if(llResult.isValid()){
-            motorTurn.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            motorTurn.setTargetPosition((currentPos - (int) txToTicks));
-            if (currentPos > rightBound) {
-                motorTurn.setPower(-motorPower);
-            } else if (currentPos < leftBound) {
-                motorTurn.setPower(motorPower);
+            } else if (llResult.isValid()) {
+                motorTurn.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                motorTurn.setTargetPosition((currentPos - (int) txToTicks));
+                break;
             }
         }
     }
