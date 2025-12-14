@@ -10,6 +10,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.teamcode.skeleton.TurnTableMotor;
 import org.firstinspires.ftc.teamcode.skeleton.shooter2;
+import org.firstinspires.ftc.teamcode.pedroPathing.motors.motorIn;
 
 @Autonomous
 public class tryAgain extends OpMode {
@@ -22,13 +23,14 @@ public class tryAgain extends OpMode {
     public enum PathState{
         DRIVE_STARTPOS_SHOOT_POS,
         DRIVE_SHOOT_POS_OTHER_POS,
+        DRIVE_OTHER_POS_START_POS,
         SHOOT_PRELOAD
     }
     PathState pathState;
     private final Pose startPose = new Pose(60, 9, Math.toRadians(90));
-    private final Pose shootPose = new Pose(35, 60, Math.toRadians(180));
-    private final Pose otherPose = new Pose(84.5, 60, Math.toRadians(0));
-    private PathChain driveStartPosShootPos, driveShootPosOtherPos;
+    private final Pose shootPose = new Pose(35, 35, Math.toRadians(180));
+    private final Pose otherPose = new Pose(85, 35, Math.toRadians(0));
+    private PathChain driveStartPosShootPos, driveShootPosOtherPos, driveOtherPoseStartPose;
 
     public void buildPaths(){
         driveStartPosShootPos = follower.pathBuilder()
@@ -39,19 +41,30 @@ public class tryAgain extends OpMode {
                 .addPath(new BezierLine(shootPose, otherPose))
                 .setLinearHeadingInterpolation(shootPose.getHeading(), otherPose.getHeading())
                 .build();
-        driveShootPosOtherPos = follower.pathBuilder()
-                .addPath(new BezierLine(shootPose, otherPose))
-                .setLinearHeadingInterpolation(shootPose.getHeading(), otherPose.getHeading())
+        driveOtherPoseStartPose = follower.pathBuilder()
+                .addPath(new BezierLine(otherPose, startPose))
+                .setLinearHeadingInterpolation(otherPose.getHeading(), startPose.getHeading())
                 .build();
     }
     public void statePathUpdate(){
         switch (pathState){
             case DRIVE_STARTPOS_SHOOT_POS:
                 follower.followPath(driveStartPosShootPos, true);
-                pathState = PathState.SHOOT_PRELOAD;
+                pathState = PathState.DRIVE_SHOOT_POS_OTHER_POS;
                 break;
             case DRIVE_SHOOT_POS_OTHER_POS:
-                telemetry.addLine("idk what to put here");
+                if(!follower.isBusy() && pathTimer.getElapsedTimeSeconds() > 10) {
+                    telemetry.addLine("idk what to put here");
+                    follower.followPath(driveShootPosOtherPos, true);
+                    pathState = PathState.DRIVE_OTHER_POS_START_POS;
+                }
+                break;
+            case DRIVE_OTHER_POS_START_POS:
+                if(!follower.isBusy() && pathTimer.getElapsedTimeSeconds() > 20) {
+                    telemetry.addLine("idk what to put here");
+                    follower.followPath(driveOtherPoseStartPose, true);
+                    pathState = PathState.SHOOT_PRELOAD;
+                }
                 break;
             case SHOOT_PRELOAD:
                 if(!follower.isBusy()){
@@ -69,19 +82,19 @@ public class tryAgain extends OpMode {
     }
     @Override
     public void init() {
-        follower.setStartingPose(new Pose(60, 9, Math.toRadians(90)));
         pathState = PathState.DRIVE_STARTPOS_SHOOT_POS;
         pathTimer = new Timer();
         opModeTimer = new Timer();
         opModeTimer.resetTimer();
         follower = Constants.createFollower(hardwareMap);
-
+        follower.setStartingPose(new Pose(60, 9, Math.toRadians(90)));
         buildPaths();
         follower.setPose(startPose);
     }
     public void start(){
         opModeTimer.resetTimer();
         setPathState(pathState);
+        moto
     }
 
     @Override
