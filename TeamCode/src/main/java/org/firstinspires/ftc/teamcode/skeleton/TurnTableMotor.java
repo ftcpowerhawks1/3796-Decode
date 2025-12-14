@@ -22,7 +22,7 @@ public class TurnTableMotor {
     double TICKS_PER_REV = 2150.8; //19.2:1 Motor
     double DEGREES_PER_TICK = 360 / TICKS_PER_REV; //19.2:1 Motor
     int currentPos = 0;
-    long lastTime = System.nanoTime();
+    long lastTime = 0
 
     public void init(HardwareMap hwMap) {
         limelight = hwMap.get(Limelight3A.class, "limelight");
