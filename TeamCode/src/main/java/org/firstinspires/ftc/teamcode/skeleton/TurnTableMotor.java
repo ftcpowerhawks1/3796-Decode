@@ -59,17 +59,21 @@ public class TurnTableMotor {
         } else if (currentPos < leftBound && txToTicks < 0) {
             motorTurn.setPower(motorPower);
             lastTime = System.nanoTime();
-        } else if (currentPos > 0 && lastTime >= (3 * Math.pow(10, -9))) {
-            motorTurn.setPower(motorPower);
-            motorTurn.setTargetPosition(0);
-        } else if (currentPos < 0 && lastTime >= (3 * Math.pow(10, -9))) {
-            motorTurn.setPower(-motorPower);
-            motorTurn.setTargetPosition(0);
         } else {
             motorTurn.setPower(0);
 
         }
+if(lastTime >= (10 * Math.pow(10, 9))){
 
+ if (currentPos > 0) {
+            motorTurn.setPower(motorPower);
+            motorTurn.setTargetPosition(0);
+        } else if (currentPos < 0) {
+            motorTurn.setPower(-motorPower);
+            motorTurn.setTargetPosition(0);
+        
+}
+}
         motorTurn.setTargetPosition((currentPos - (int) txToTicks));
 
     }
