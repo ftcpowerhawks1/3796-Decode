@@ -63,6 +63,7 @@ public class TurnTableMotor {
             motorTurn.setPower(0);
 
         }
+if(llResult.valid!=){
 if(lastTime >= (10 * Math.pow(10, 9))){
 
  if (currentPos > 0) {
@@ -71,6 +72,7 @@ if(lastTime >= (10 * Math.pow(10, 9))){
         } else if (currentPos < 0) {
             motorTurn.setPower(-motorPower);
             motorTurn.setTargetPosition(0);
+}
         
 }
 }
