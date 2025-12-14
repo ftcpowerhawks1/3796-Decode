@@ -59,29 +59,30 @@ public class YurnYable {
             motorTurn.setPower(motorPower);
         } else {
             motorTurn.setPower(0);
-        }
+            if (!llResult.isValid() && motorTurn.getPower() == 0) {
+                Timer timer = new Timer();
+                seconds = timer.getElapsedTimeSeconds();
 
-        if (!llResult.isValid() && motorTurn.getPower() == 0) {
-            Timer timer = new Timer();
-            seconds = timer.getElapsedTimeSeconds();
+                if (seconds > 10) {
 
-            if (seconds > 10) {
+                    if (currentPos > 0) {
+                        motorTurn.setTargetPosition(0);
+                        motorTurn.setPower(motorPower);
+                        timer.resetTimer();
+                        seconds = 0;
 
-                if (currentPos > 0) {
-                    motorTurn.setTargetPosition(0);
-                    motorTurn.setPower(motorPower);
-                    timer.resetTimer();
-                    seconds = 0;
+                    } else if (currentPos < 0) {
+                        motorTurn.setTargetPosition(0);
+                        motorTurn.setPower(-motorPower);
+                        timer.resetTimer();
+                        seconds = 0;
+                    }
 
-                } else if (currentPos < 0) {
-                    motorTurn.setTargetPosition(0);
-                    motorTurn.setPower(-motorPower);
-                    timer.resetTimer();
-                    seconds = 0;
                 }
-
             }
         }
+
+
 
         motorTurn.setTargetPosition((currentPos - (int) txToTicks));
 
