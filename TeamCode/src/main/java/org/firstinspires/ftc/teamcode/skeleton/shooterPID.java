@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.skeleton;
 
+import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -7,7 +8,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.old.skelly.SimplePID;
 
-
+@Config
 public class shooterPID {
     private DcMotor motorShoot;
     private Limelight3A limelight;
