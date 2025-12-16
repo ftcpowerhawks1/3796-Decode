@@ -26,7 +26,7 @@ public class YURNWORKING extends OpMode{
         drive.init(hardwareMap);
 
         //MODE = 0 ANY TAG || MODE = 1 BLUE || MODE = 2 RED
-        shoot.init(hardwareMap,0);
+        shoot.init(hardwareMap,1);
 
         turnTableMotor.init(hardwareMap);
     }
