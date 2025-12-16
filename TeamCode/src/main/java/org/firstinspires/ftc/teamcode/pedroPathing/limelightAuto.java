@@ -1,7 +1,8 @@
-package org.firstinspires.ftc.teamcode.firstComp;
+package org.firstinspires.ftc.teamcode.pedroPathing;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 
+import org.firstinspires.ftc.teamcode.firstComp.shooterCOMP;
 import org.firstinspires.ftc.teamcode.skeleton.TurnTableMotor;
 
 public class limelightAuto {
