@@ -7,7 +7,7 @@ import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import org.firstinspires.ftc.teamcode.old.skelly.SimplePID;
+import org.firstinspires.ftc.teamcode.PID.SimplePID;
 
 import java.util.List;
 @Config

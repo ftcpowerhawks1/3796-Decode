@@ -1,16 +1,14 @@
-package org.firstinspires.ftc.teamcode.skeleton;
+package org.firstinspires.ftc.teamcode.PID;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
-import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-
-import org.firstinspires.ftc.teamcode.old.skelly.SimplePID;
 
 @Config
 public class shooterPID {
-    private DcMotor motorShoot;
+    private DcMotorEx motorShoot;
     private Limelight3A limelight;
     static int[] distances = {65, 70, 80, 85, 95, 100, 120, 155, 185, 190, 215, 220, 305, 325, 360, 365};
     static double[] powers = {0.57, 0.54, 0.51, 0.5, 0.49, 0.49, 0.48, 0.53, 0.56, 0.55, 0.56, 0.57, 0.61, 0.63, 0.67, 0.71};
@@ -32,8 +30,8 @@ public class shooterPID {
         limelight.setPollRateHz(100);
         limelight.pipelineSwitch(mode);
 
-        motorShoot = hwMap.get(DcMotor.class, "motorShoot");
-        motorShoot.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorShoot = hwMap.get(DcMotorEx.class, "motorShoot");
+        motorShoot.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
     }
 
     public void ShooterVelocity(int power) {
@@ -47,11 +45,13 @@ public class shooterPID {
             pid.reset();
         }
     }
-
+    public double currentVelocity(){
+        double motorPowerCurrent  = motorShoot.getVelocity()*(360/112);
+        return motorPowerCurrent;
+    }
     public double getShootValue(){
         return shootValue;
     }
-
     public double getPidShoot(){
         return pidShoot;
     }

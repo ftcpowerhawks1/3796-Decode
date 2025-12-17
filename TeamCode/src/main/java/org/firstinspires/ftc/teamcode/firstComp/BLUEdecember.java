@@ -6,7 +6,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.skeleton.MecanumDriveCode;
 import org.firstinspires.ftc.teamcode.skeleton.TurnTableMotor;
-import org.firstinspires.ftc.teamcode.skeleton.shooterPID;
 
 @TeleOp
 public class BLUEdecember extends OpMode{
