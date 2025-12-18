@@ -109,7 +109,7 @@ public class November2 extends OpMode {
             }
         }
 
-    @TeleOp
+    //@TeleOp
     public static class November3 extends OpMode{
         TurnTableMotor turnTableMotor = new TurnTableMotor();
         MecanumDriveCode drive = new MecanumDriveCode();

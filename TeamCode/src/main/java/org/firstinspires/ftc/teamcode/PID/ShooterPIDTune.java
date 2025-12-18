@@ -22,13 +22,12 @@ public class ShooterPIDTune extends OpMode {
         seconds = timer.getElapsedTimeSeconds();
         telemetry.addData("Time(s)",seconds);
 
-        telemetry.addData("Expected Velocity",shooter.pidShoot);
+        telemetry.addData("Distance", shooter.distance());
+        telemetry.addData("Expected Velocity",shooter.getShootValue());
         telemetry.addData("Current Velocity",shooter.currentVelocity());
 
         if(gamepad1.right_trigger > 0.05){
             shooter.ShooterVelocity(1);
-        }else if(gamepad1.a){
-            shooter.ShooterVelocity(-1);
         }else{
             shooter.ShooterVelocity(0);
         }

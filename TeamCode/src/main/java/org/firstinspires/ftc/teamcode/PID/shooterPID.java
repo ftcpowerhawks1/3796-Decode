@@ -14,9 +14,9 @@ public class shooterPID {
     static double[] powers = {0.57, 0.54, 0.51, 0.5, 0.49, 0.49, 0.48, 0.53, 0.56, 0.55, 0.56, 0.57, 0.61, 0.63, 0.67, 0.71};
 
     //TODO CALIBRATE
-    public static double p = 0.0;
+    public static double p = 0.01;
     public static double i = 0.15;
-    public static double d = 0.045;
+    public static double d = 0.0;
 
     double pidShoot = 0;
 
@@ -37,7 +37,7 @@ public class shooterPID {
     public void ShooterVelocity(int power) {
         shootValue = lookupClosest(distance(),distances,powers);
         if(power == 1){
-            pidShoot = (pid.update(distance(), shootValue));
+            pidShoot = (pid.update(currentVelocity(), shootValue));
             motorShoot.setPower(pidShoot);
         }else if(power == 0){
             pidShoot = 0;
@@ -46,9 +46,10 @@ public class shooterPID {
         }
     }
     public double currentVelocity(){
-        double motorPowerCurrent  = motorShoot.getVelocity()*(360/112);
+        double motorPowerCurrent  = Math.abs((motorShoot.getVelocity()/100)*11200);
         return motorPowerCurrent;
     }
+
     public double getShootValue(){
         return shootValue;
     }
