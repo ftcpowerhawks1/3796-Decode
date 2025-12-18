@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.PID;
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
@@ -31,13 +32,13 @@ public class shooterPID {
         limelight.pipelineSwitch(mode);
 
         motorShoot = hwMap.get(DcMotorEx.class, "motorShoot");
-        motorShoot.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        motorShoot.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
     }
 
     public void ShooterVelocity(int power) {
-        shootValue = lookupClosest(distance(),distances,powers);
+        shootValue = (lookupClosest(distance(),distances,powers))*6000;
         if(power == 1){
-            pidShoot = (pid.update(currentVelocity(), shootValue));
+            pidShoot = ((pid.update(currentVelocity(), shootValue)))/6000;
             motorShoot.setPower(pidShoot);
         }else if(power == 0){
             pidShoot = 0;
@@ -46,7 +47,7 @@ public class shooterPID {
         }
     }
     public double currentVelocity(){
-        double motorPowerCurrent  = Math.abs((motorShoot.getVelocity()/100)*11200);
+        double motorPowerCurrent  = motorShoot.getVelocity()*(60/112);
         return motorPowerCurrent;
     }
 
