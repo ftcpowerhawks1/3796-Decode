@@ -6,11 +6,12 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.XurnXable;
 import org.firstinspires.ftc.teamcode.skeleton.MecanumDriveCode;
+import org.firstinspires.ftc.teamcode.skeleton.MecanumDriveCodePinpoint;
 
-//@TeleOp
+@TeleOp
 public class REDNEW extends OpMode{
     XurnXable turnTableMotor = new XurnXable();
-    MecanumDriveCode drive = new MecanumDriveCode();
+    MecanumDriveCodePinpoint drive = new MecanumDriveCodePinpoint();
     shooterCOMP shoot = new shooterCOMP();
 
 
@@ -36,7 +37,7 @@ public class REDNEW extends OpMode{
         double rotate = gamepad1.right_stick_x;
         double maxSpeed = 1.0;
 
-        drive.drive(forward,strafe,rotate,maxSpeed);
+        drive.driveFieldRelative(forward,strafe,rotate,maxSpeed);
 
 //TURRET
         turnTableMotor.track();
