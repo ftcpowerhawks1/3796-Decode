@@ -4,11 +4,10 @@ import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.LLResultTypes;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.old.skelly.LimelightCode;
-import org.firstinspires.ftc.teamcode.skeleton.MecanumDriveCode;
+import org.firstinspires.ftc.teamcode.skeleton.MecanumDriveCodePinpoint;
 import org.firstinspires.ftc.teamcode.old.skelly.ShooterCode;
 
 import java.util.List;
@@ -19,7 +18,7 @@ public class November extends OpMode {
     double shootSpeed = 0.00;
     private DcMotor intake, motorTurn;
     private Limelight3A limelight;
-    MecanumDriveCode drive = new MecanumDriveCode();
+    MecanumDriveCodePinpoint drive = new MecanumDriveCodePinpoint();
     double forward, strafe, rotate;
     double speed = 1.0;
     LimelightCode limelightCode = new LimelightCode();

@@ -1,17 +1,16 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-import org.firstinspires.ftc.teamcode.skeleton.MecanumDriveCode;
+import org.firstinspires.ftc.teamcode.skeleton.MecanumDriveCodePinpoint;
 import org.firstinspires.ftc.teamcode.skeleton.TurnTableMotor;
 import org.firstinspires.ftc.teamcode.skeleton.shooter;
 
 //@TeleOp
 public class November4 extends OpMode{
     TurnTableMotor turnTableMotor = new TurnTableMotor();
-    MecanumDriveCode drive = new MecanumDriveCode();
+    MecanumDriveCodePinpoint drive = new MecanumDriveCodePinpoint();
     shooter shoot = new shooter();
     private DcMotor motorIntake;
 

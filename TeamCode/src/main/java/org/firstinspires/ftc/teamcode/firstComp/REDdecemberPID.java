@@ -4,14 +4,14 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-import org.firstinspires.ftc.teamcode.skeleton.MecanumDriveCode;
+import org.firstinspires.ftc.teamcode.skeleton.MecanumDriveCodePinpoint;
 import org.firstinspires.ftc.teamcode.skeleton.TurnTableMotor;
 import org.firstinspires.ftc.teamcode.PID.shooterPID;
 
 @TeleOp
 public class REDdecemberPID extends OpMode{
     TurnTableMotor turnTableMotor = new TurnTableMotor();
-    MecanumDriveCode drive = new MecanumDriveCode();
+    MecanumDriveCodePinpoint drive = new MecanumDriveCodePinpoint();
     shooterPID shoot = new shooterPID();
 
 

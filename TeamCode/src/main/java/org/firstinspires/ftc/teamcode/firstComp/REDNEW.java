@@ -5,7 +5,10 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.XurnXable;
+<<<<<<< Updated upstream
 import org.firstinspires.ftc.teamcode.skeleton.MecanumDriveCode;
+=======
+>>>>>>> Stashed changes
 import org.firstinspires.ftc.teamcode.skeleton.MecanumDriveCodePinpoint;
 
 @TeleOp

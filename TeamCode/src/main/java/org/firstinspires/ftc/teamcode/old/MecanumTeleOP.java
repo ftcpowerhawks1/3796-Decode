@@ -1,14 +1,13 @@
 package org.firstinspires.ftc.teamcode.old;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.skeleton.MecanumDriveCode;
+import org.firstinspires.ftc.teamcode.skeleton.MecanumDriveCodePinpoint;
 import org.firstinspires.ftc.teamcode.old.skelly.MotorCode;
 
 //@TeleOp
 public class MecanumTeleOP extends OpMode {
-    MecanumDriveCode drive = new MecanumDriveCode();
+    MecanumDriveCodePinpoint drive = new MecanumDriveCodePinpoint();
     MotorCode shooter = new MotorCode();
 
     double velocity;

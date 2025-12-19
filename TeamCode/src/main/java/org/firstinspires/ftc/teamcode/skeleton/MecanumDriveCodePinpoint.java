@@ -42,6 +42,7 @@ public class MecanumDriveCodePinpoint {
         imu = hwMap.get(IMU.class, "imu");
         // This needs to be changed to match the orientation on your robot
         RevHubOrientationOnRobot RevOrientation = new RevHubOrientationOnRobot(
+<<<<<<< Updated upstream
                 RevHubOrientationOnRobot.LogoFacingDirection.BACKWARD,
                 RevHubOrientationOnRobot.UsbFacingDirection.UP);
 
@@ -49,6 +50,57 @@ public class MecanumDriveCodePinpoint {
 
         pinpoint = hwMap.get(GoBildaPinpointDriver.class,"pinpoint");
         configurePinpoint();
+=======
+                RevHubOrientationOnRobot.LogoFacingDirection.UP,
+                RevHubOrientationOnRobot.UsbFacingDirection.LEFT);
+        imu.initialize(new IMU.Parameters(RevOrientation));
+
+        pinpoint = hwMap.get(GoBildaPinpointDriver.class, "pinpoint");
+        configurePinpoint();
+
+
+
+    }
+
+    public void configurePinpoint(){
+        /*
+         *  Set the odometry pod positions relative to the point that you want the position to be measured from.
+         *
+         *  The X pod offset refers to how far sideways from the tracking point the X (forward) odometry pod is.
+         *  Left of the center is a positive number, right of center is a negative number.
+         *
+         *  The Y pod offset refers to how far forwards from the tracking point the Y (strafe) odometry pod is.
+         *  Forward of center is a positive number, backwards is a negative number.
+         */
+        pinpoint.setOffsets(-2.625, -6.625, DistanceUnit.INCH);
+
+        /*
+         * Set the kind of pods used by your robot. If you're using goBILDA odometry pods, select either
+         * the goBILDA_SWINGARM_POD, or the goBILDA_4_BAR_POD.
+         * If you're using another kind of odometry pod, uncomment setEncoderResolution and input the
+         * number of ticks per unit of your odometry pod.  For example:
+         *     pinpoint.setEncoderResolution(13.26291192, DistanceUnit.MM);
+         */
+        pinpoint.setEncoderResolution(GoBildaPinpointDriver.GoBildaOdometryPods.goBILDA_4_BAR_POD);
+
+        /*
+         * Set the direction that each of the two odometry pods count. The X (forward) pod should
+         * increase when you move the robot forward. And the Y (strafe) pod should increase when
+         * you move the robot to the left.
+         */
+        pinpoint.setEncoderDirections(GoBildaPinpointDriver.EncoderDirection.FORWARD,
+                GoBildaPinpointDriver.EncoderDirection.REVERSED);
+
+        /*
+         * Before running the robot, recalibrate the IMU. This needs to happen when the robot is stationary
+         * The IMU will automatically calibrate when first powered on, but recalibrating before running
+         * the robot is a good idea to ensure that the calibration is "good".
+         * resetPosAndIMU will reset the position to 0,0,0 and also recalibrate the IMU.
+         * This is recommended before you run your autonomous, as a bad initial calibration can cause
+         * an incorrect starting value for x, y, and heading.
+         */
+        pinpoint.resetPosAndIMU();
+>>>>>>> Stashed changes
     }
      double maxSpeed;
     public void drive(double forward, double strafe, double rotate, double maxSpeed) {
@@ -78,6 +130,7 @@ public class MecanumDriveCodePinpoint {
         backLeftMotor.setPower(maxSpeed * (backLeftPower / maxPower));
         backRightMotor.setPower(maxSpeed * (backRightPower / maxPower));
     }
+<<<<<<< Updated upstream
     public void configurePinpoint(){
 
         pinpoint.setEncoderResolution(GoBildaPinpointDriver.GoBildaOdometryPods.goBILDA_4_BAR_POD);
@@ -87,14 +140,28 @@ public class MecanumDriveCodePinpoint {
     }
     public void driveFieldRelative(double forward, double strafe, double rotate, double maxSpeed) {
         Pose2D pose2D = pinpoint.getPosition();
+=======
+
+    public void driveFieldRelative(double forward, double strafe, double rotate, double maxSpeed) {
+>>>>>>> Stashed changes
         // First, convert direction being asked to drive to polar coordinates
         double theta = Math.atan2(forward, strafe);
         double r = Math.hypot(strafe, forward);
 
+<<<<<<< Updated upstream
+=======
+        //Pinpoint Pose
+        Pose2D pose2D = pinpoint.getPosition();
+
+>>>>>>> Stashed changes
         // Second, rotate angle by the angle the robot is pointing
         theta = AngleUnit.normalizeRadians(theta -
                 pose2D.getHeading(AngleUnit.RADIANS));
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
         // Third, convert back to cartesian
         double newForward = r * Math.sin(theta);
         double newStrafe = r * Math.cos(theta);
