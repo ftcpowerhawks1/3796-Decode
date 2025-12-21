@@ -2,12 +2,12 @@ package org.firstinspires.ftc.teamcode.old;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
-import org.firstinspires.ftc.teamcode.skeleton.MecanumDriveCodePinpoint;
 import org.firstinspires.ftc.teamcode.old.skelly.MotorCode;
+import org.firstinspires.ftc.teamcode.skeleton.MecanumDriveCode;
 
 //@TeleOp
 public class MecanumTeleOP extends OpMode {
-    MecanumDriveCodePinpoint drive = new MecanumDriveCodePinpoint();
+    MecanumDriveCode drive = new MecanumDriveCode();
     MotorCode shooter = new MotorCode();
 
     double velocity;
@@ -37,10 +37,10 @@ public class MecanumTeleOP extends OpMode {
             telemetry.addData("Mode", "null");
         } else if (mode == 0) {
             telemetry.addData("Mode", "Robot Oriented");
-            drive.drive(forward, strafe, rotate, speed);
+            drive.drive(forward, strafe, rotate);
         } else if (mode == 1) {
             telemetry.addData("Mode", "Field Oriented");
-            drive.driveFieldRelative(forward, strafe, rotate, speed);
+            drive.driveFieldRelative(forward, strafe, rotate);
         }
         if (gamepad1.dpad_down) {
             mode = 0;

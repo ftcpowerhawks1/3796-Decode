@@ -5,10 +5,6 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.XurnXable;
-<<<<<<< Updated upstream
-import org.firstinspires.ftc.teamcode.skeleton.MecanumDriveCode;
-=======
->>>>>>> Stashed changes
 import org.firstinspires.ftc.teamcode.skeleton.MecanumDriveCodePinpoint;
 
 @TeleOp
@@ -40,7 +36,7 @@ public class REDNEW extends OpMode{
         double rotate = gamepad1.right_stick_x;
         double maxSpeed = 1.0;
 
-        drive.driveFieldRelative(forward,strafe,rotate,maxSpeed);
+        drive.driveFieldRelative(forward,strafe,rotate);
 
 //TURRET
         turnTableMotor.track();

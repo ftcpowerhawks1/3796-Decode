@@ -36,7 +36,7 @@ public class BLUEdecember extends OpMode{
         double rotate = gamepad1.right_stick_x;
         double maxSpeed = 1.0;
 
-        drive.drive(forward,strafe,rotate,maxSpeed);
+        drive.driveFieldRelative(forward,strafe,rotate);
 
 //TURRET
         turnTableMotor.track();

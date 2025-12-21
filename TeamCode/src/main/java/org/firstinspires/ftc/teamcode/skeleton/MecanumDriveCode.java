@@ -1,23 +1,15 @@
 package org.firstinspires.ftc.teamcode.skeleton;
 
-import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver;
-import com.qualcomm.hardware.limelightvision.LLResult;
-import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-import org.firstinspires.ftc.robotcore.external.navigation.Pose2D;
-import org.firstinspires.ftc.robotcore.external.navigation.Pose3D;
 
-public class MecanumDriveCodePinpoint {
+public class MecanumDriveCode {
     private DcMotor frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor;
     private IMU imu;
-    private GoBildaPinpointDriver pinpoint;
-    private Limelight3A limelight;
 
     public void init(HardwareMap hwMap) {
         //make sure configured correctly on hardware map
@@ -27,8 +19,8 @@ public class MecanumDriveCodePinpoint {
         backRightMotor = hwMap.get(DcMotor.class, "backRight");
         // We set the left motors in reverse which is needed for drive trains where the left
         // motors are opposite to the right ones.
-        frontLeftMotor.setDirection(DcMotor.Direction.REVERSE);
-        backLeftMotor.setDirection(DcMotor.Direction.REVERSE);
+        frontRightMotor.setDirection(DcMotor.Direction.REVERSE);
+        backRightMotor.setDirection(DcMotor.Direction.REVERSE);
 
         // This uses RUN_USING_ENCODER to be more accurate.   If you don't have the encoder
         // wires, you should remove these
@@ -50,32 +42,6 @@ public class MecanumDriveCodePinpoint {
                 RevHubOrientationOnRobot.UsbFacingDirection.FORWARD);
 
         imu.initialize(new IMU.Parameters(RevOrientation));
-
-        pinpoint = hwMap.get(GoBildaPinpointDriver.class, "pinpoint");
-
-        configurePinpoint();
-    }
-
-    private void configurePinpoint(){
-
-        pinpoint.setOffsets(-2.625, -6.625, DistanceUnit.INCH); //these are tuned for 3110-0002-0001 Product Insight #1
-
-        pinpoint.setEncoderResolution(GoBildaPinpointDriver.GoBildaOdometryPods.goBILDA_4_BAR_POD);
-
-        pinpoint.setEncoderDirections(GoBildaPinpointDriver.EncoderDirection.FORWARD,
-                GoBildaPinpointDriver.EncoderDirection.REVERSED);
-
-        pinpoint.resetPosAndIMU();
-
-    }
-
-    public void robotPose(){
-        LLResult llResult = limelight.getLatestResult();
-        if(llResult != null && llResult.isValid()){
-            Pose3D botpose = llResult.getBotpose_MT2();
-            pinpoint.setPosition(new Pose2D(DistanceUnit.INCH,llResult.getBotpose().getPosition().x , llResult.getBotpose().getPosition().y, AngleUnit.RADIANS, 0));
-        }
-
     }
 
     public void drive(double forward, double strafe, double rotate) {
@@ -113,7 +79,7 @@ public class MecanumDriveCodePinpoint {
 
         // Second, rotate angle by the angle the robot is pointing
         theta = AngleUnit.normalizeRadians(theta -
-                pinpoint.getHeading(AngleUnit.RADIANS));
+                imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS));
 
         // Third, convert back to cartesian
         double newForward = r * Math.sin(theta);

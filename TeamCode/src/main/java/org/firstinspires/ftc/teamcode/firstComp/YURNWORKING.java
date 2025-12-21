@@ -5,12 +5,12 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.XurnXable;
-import org.firstinspires.ftc.teamcode.skeleton.MecanumDriveCodePinpoint;
+import org.firstinspires.ftc.teamcode.skeleton.MecanumDriveCode;
 
 @TeleOp
 public class YURNWORKING extends OpMode{
     XurnXable turnTableMotor = new XurnXable();
-    MecanumDriveCodePinpoint drive = new MecanumDriveCodePinpoint();
+    MecanumDriveCode drive = new MecanumDriveCode();
     shooterCOMP shoot = new shooterCOMP();
 
 
@@ -36,7 +36,7 @@ public class YURNWORKING extends OpMode{
         double rotate = gamepad1.right_stick_x;
         double maxSpeed = 1.0;
 
-        drive.drive(forward,strafe,rotate,maxSpeed);
+        drive.drive(forward,strafe,rotate);
 
 //TURRET
         turnTableMotor.track();

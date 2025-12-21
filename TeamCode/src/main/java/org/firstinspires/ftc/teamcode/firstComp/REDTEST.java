@@ -3,13 +3,13 @@ package org.firstinspires.ftc.teamcode.firstComp;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-import org.firstinspires.ftc.teamcode.skeleton.MecanumDriveCodePinpoint;
+import org.firstinspires.ftc.teamcode.skeleton.MecanumDriveCode;
 import org.firstinspires.ftc.teamcode.skeleton.TurnTableMotor;
 
 //@TeleOp
 public class REDTEST extends OpMode{
     TurnTableMotor turnTableMotor = new TurnTableMotor();
-    MecanumDriveCodePinpoint drive = new MecanumDriveCodePinpoint();
+    MecanumDriveCode drive = new MecanumDriveCode();
     shooterCOMP shoot = new shooterCOMP();
 
 
@@ -35,7 +35,7 @@ public class REDTEST extends OpMode{
         double rotate = gamepad1.right_stick_x;
         double maxSpeed = 1.0;
 
-        drive.drive(forward,strafe,rotate,maxSpeed);
+        drive.drive(forward,strafe,rotate);
 
 //TURRET
         turnTableMotor.track();

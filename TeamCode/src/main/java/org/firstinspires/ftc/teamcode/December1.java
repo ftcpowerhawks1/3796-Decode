@@ -3,14 +3,14 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-import org.firstinspires.ftc.teamcode.skeleton.MecanumDriveCodePinpoint;
+import org.firstinspires.ftc.teamcode.skeleton.MecanumDriveCode;
 import org.firstinspires.ftc.teamcode.skeleton.TurnTableMotor;
 import org.firstinspires.ftc.teamcode.skeleton.shooter2;
 
 //@TeleOp
 public class December1 extends OpMode{
     TurnTableMotor turnTableMotor = new TurnTableMotor();
-    MecanumDriveCodePinpoint drive = new MecanumDriveCodePinpoint();
+    MecanumDriveCode drive = new MecanumDriveCode();
     shooter2 shoot2 = new shooter2();
 
     private DcMotor motorIntake;
@@ -34,7 +34,7 @@ public class December1 extends OpMode{
         double rotate = -gamepad1.right_stick_x;
         double maxSpeed = 1.0;
 
-        drive.drive(forward,strafe,rotate,maxSpeed);
+        drive.drive(forward,strafe,rotate);
 
 //TURRET
         turnTableMotor.track();

@@ -9,13 +9,13 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.firstComp.shooterCOMP;
-import org.firstinspires.ftc.teamcode.skeleton.MecanumDriveCodePinpoint;
+import org.firstinspires.ftc.teamcode.skeleton.MecanumDriveCode;
 import org.firstinspires.ftc.teamcode.skeleton.TurnTableMotor;
 @Autonomous
 public class blehue extends OpMode {
     double inPower = 0.45;
     TurnTableMotor turnTableMotor = new TurnTableMotor();
-    MecanumDriveCodePinpoint drive = new MecanumDriveCodePinpoint();
+    MecanumDriveCode drive = new MecanumDriveCode();
     shooterCOMP shoot = new shooterCOMP();
     private DcMotor motorIntake;
     private Follower follower;

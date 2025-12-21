@@ -7,8 +7,8 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.old.skelly.LimelightCode;
-import org.firstinspires.ftc.teamcode.skeleton.MecanumDriveCodePinpoint;
 import org.firstinspires.ftc.teamcode.old.skelly.ShooterCode;
+import org.firstinspires.ftc.teamcode.skeleton.MecanumDriveCode;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class November extends OpMode {
     double shootSpeed = 0.00;
     private DcMotor intake, motorTurn;
     private Limelight3A limelight;
-    MecanumDriveCodePinpoint drive = new MecanumDriveCodePinpoint();
+    MecanumDriveCode drive = new MecanumDriveCode();
     double forward, strafe, rotate;
     double speed = 1.0;
     LimelightCode limelightCode = new LimelightCode();
@@ -51,7 +51,7 @@ public class November extends OpMode {
             strafe = -gamepad1.left_stick_x;
             rotate = -gamepad1.right_stick_x;
             //Uses variables to execute motor rotations
-            drive.drive(forward, strafe, rotate, speed);
+            drive.drive(forward, strafe, rotate);
 //TURRET TURN
             //Actively Tracks AprilTag as code runs
 
