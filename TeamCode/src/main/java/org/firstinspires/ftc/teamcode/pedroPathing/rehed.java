@@ -16,7 +16,7 @@ public class rehed extends OpMode {
     double inPower = 0.475;
     TurnTableMotor turnTableMotor = new TurnTableMotor();
     MecanumDriveCode drive = new MecanumDriveCode();
-    shooterCOMP shoot = new shooterCOMP();
+    shooterStuff shoot = new shooterStuff();
     private DcMotor motorIntake;
     private Follower follower;
     private Timer pathTimer, opModeTimer;

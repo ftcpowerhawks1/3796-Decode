@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.skeleton.MecanumDriveCodePinpoint;
-@TeleOp
+//@TeleOp
 public class teloeoeoepe extends OpMode {
     MecanumDriveCodePinpoint drive = new MecanumDriveCodePinpoint();
 

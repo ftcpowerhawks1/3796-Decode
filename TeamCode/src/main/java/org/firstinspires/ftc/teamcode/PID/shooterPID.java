@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-@Config
+//@Config
 public class shooterPID {
     private DcMotorEx motorShoot;
     private Limelight3A limelight;

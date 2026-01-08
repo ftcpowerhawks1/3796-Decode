@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.teamcode.skeleton.LimeLightCode;
 import org.firstinspires.ftc.teamcode.skeleton.TurnTableMotor;
 
-@TeleOp
+//@TeleOp
 public class CHARLIEUSETHIS extends OpMode {
     double power = 0;
     private DcMotor motorShoot;

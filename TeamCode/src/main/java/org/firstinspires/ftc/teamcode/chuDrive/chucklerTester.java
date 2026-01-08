@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
-@TeleOp
+//@TeleOp
 public class chucklerTester extends OpMode {
     public DcMotorEx motorShoot;
     public double highVelocity = 5000;

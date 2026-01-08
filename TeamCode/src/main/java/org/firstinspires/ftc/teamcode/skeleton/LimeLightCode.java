@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.teamcode.PID.SimplePID;
 
 import java.util.List;
-@Config
+//@Config
 public class LimeLightCode {
     public static double p = 0.0;
     public static double i = 0.15;

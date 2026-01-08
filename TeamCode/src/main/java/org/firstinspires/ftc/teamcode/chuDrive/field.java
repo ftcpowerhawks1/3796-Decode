@@ -4,18 +4,19 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 @TeleOp
-public class blueAnureism extends OpMode {
+public class field extends OpMode {
     // Innie thing and outie thing motors
     private DcMotor intake;     // Pulls artifacts in
     // Flywheel shooter
     // Drivetrain motors
     double driveMult = 1;
     double inMult = 1;
-    mecanumDrive drive = new mecanumDrive();
+    mecFieldCent drive = new mecFieldCent();
     aimCode aim = new aimCode();
     shooterStuff shoot = new shooterStuff();
     @Override
     public void init() {
+        drive.resetHeading();
         int shootMode = 2;
         telemetry.addData("Red is 2, Blue is 1", shootMode);
 
@@ -41,8 +42,7 @@ public class blueAnureism extends OpMode {
         } else if(gamepad2.bWasPressed()){
             inMult = inMult + 0.1;
         }
-        intake.setPower(gamepad2.left_stick_y+gamepad1.right_trigger-gamepad1.left_trigger * inMult);
-
+        intake.setPower(-gamepad2.left_stick_y * inMult);
         telemetry.addData("DriveMult", driveMult);
         telemetry.addData("InMult", inMult);
         double forward = gamepad1.left_stick_y;
@@ -56,5 +56,6 @@ public class blueAnureism extends OpMode {
         }else{
             shoot.ShooterVelocity(0);
         }
+        telemetry.addData("heading", drive.getHeading());
     }
 }

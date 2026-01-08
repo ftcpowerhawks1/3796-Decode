@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.teamcode.XurnXable;
 import org.firstinspires.ftc.teamcode.skeleton.MecanumDriveCodePinpoint;
 
-@TeleOp
+//@TeleOp
 public class REDNEW extends OpMode{
     XurnXable turnTableMotor = new XurnXable();
     MecanumDriveCodePinpoint drive = new MecanumDriveCodePinpoint();

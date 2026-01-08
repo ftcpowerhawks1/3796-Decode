@@ -16,7 +16,7 @@ public class blehue extends OpMode {
     double inPower = 0.45;
     TurnTableMotor turnTableMotor = new TurnTableMotor();
     MecanumDriveCode drive = new MecanumDriveCode();
-    shooterCOMP shoot = new shooterCOMP();
+    shooterStuff shoot = new shooterStuff();
     private DcMotor motorIntake;
     private Follower follower;
     private Timer pathTimer, opModeTimer;

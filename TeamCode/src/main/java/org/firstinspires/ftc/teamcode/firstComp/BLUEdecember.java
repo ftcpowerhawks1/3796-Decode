@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.skeleton.MecanumDriveCode;
 import org.firstinspires.ftc.teamcode.skeleton.MecanumDriveCodePinpoint;
 import org.firstinspires.ftc.teamcode.skeleton.TurnTableMotor;
 
-@TeleOp
+//@TeleOp
 public class BLUEdecember extends OpMode{
     TurnTableMotor turnTableMotor = new TurnTableMotor();
     MecanumDriveCode drive = new MecanumDriveCode();

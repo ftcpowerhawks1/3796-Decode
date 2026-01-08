@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode.PID;
 
 import com.acmerobotics.dashboard.config.Config;
 
-@Config
+//@Config
 public class SimplePID {
     public static double kP, kI, kD;
     double integral = 0;

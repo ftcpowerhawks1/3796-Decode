@@ -5,8 +5,8 @@ import com.pedropathing.util.Timer;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-@Config
-@TeleOp
+//@Config
+//@TeleOp
 public class ShooterPIDTune extends OpMode {
     shooterPID shooter = new shooterPID();
     Timer timer = new Timer();

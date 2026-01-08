@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 
-@TeleOp
+//@TeleOp
 public class distanceVelo extends OpMode {
     private DcMotorEx motorShoot;
     private DcMotor motorIntake;
