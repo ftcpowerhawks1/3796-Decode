@@ -41,8 +41,7 @@ public class redAnureism extends OpMode {
         } else if(gamepad2.bWasPressed()){
             inMult = inMult + 0.1;
         }
-        intake.setPower(-gamepad2.left_stick_y * inMult);
-
+        intake.setPower(gamepad2.left_stick_y+gamepad1.right_trigger-gamepad1.left_trigger * inMult);
         telemetry.addData("DriveMult", driveMult);
         telemetry.addData("InMult", inMult);
         double forward = gamepad1.left_stick_y;
