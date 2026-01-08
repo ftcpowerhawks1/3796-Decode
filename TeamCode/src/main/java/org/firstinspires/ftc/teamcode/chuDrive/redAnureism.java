@@ -55,5 +55,6 @@ public class redAnureism extends OpMode {
         }else{
             shoot.ShooterVelocity(0);
         }
+        telemetry.addData("Velocity", null);
     }
 }
