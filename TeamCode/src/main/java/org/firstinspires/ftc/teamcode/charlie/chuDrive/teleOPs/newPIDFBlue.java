@@ -3,15 +3,14 @@ package org.firstinspires.ftc.teamcode.charlie.chuDrive.teleOPs;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
-import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.charlie.chuDrive.packages.aimCode;
 import org.firstinspires.ftc.teamcode.charlie.chuDrive.packages.mecanumDrive;
 import org.firstinspires.ftc.teamcode.charlie.chuDrive.packages.shooterPIDF;
 
 @TeleOp
-public class newlePIDFBlue extends OpMode {
-    // Innie thing and outie thing motors
+public class newPIDFBlue extends OpMode {
+    // Innie thing and out thing motors
     private CRServo intakeFront;     // Pulls artifacts in
     private CRServo intakeBack;
     // Flywheel shooter
@@ -44,19 +43,13 @@ public class newlePIDFBlue extends OpMode {
         double forward = gamepad1.left_stick_y;
         double strafe = -gamepad1.left_stick_x;
         double rotate = -gamepad1.right_stick_x;
-        if(gamepad1.y){
-            intakeFront.setPower(-1);
-        } else if (gamepad1.a) {
-            intakeFront.setPower(1);
+        intakeFront.setPower(gamepad1.left_trigger - gamepad1.right_trigger);
+        if(gamepad1.right_bumper){
+            intakeBack.setPower(-1);
+        } else if (gamepad1.left_bumper) {
+            intakeBack.setPower(1);
         } else {
-            intakeFront.setPower(0);
-        }
-        if(gamepad1.y){
-            intakeFront.setPower(-1);
-        } else if (gamepad1.a) {
-            intakeFront.setPower(1);
-        } else {
-            intakeFront.setPower(0);
+            intakeBack.setPower(0);
         }
         drive.drive(forward,strafe,rotate);
         aim.track();
