@@ -43,7 +43,7 @@ public class newPIDFBlue extends OpMode {
         double forward = gamepad1.left_stick_y;
         double strafe = -gamepad1.left_stick_x;
         double rotate = -gamepad1.right_stick_x;
-        intakeFront.setPower(gamepad1.left_trigger - gamepad1.right_trigger);
+        intakeFront.setPower(gamepad1.right_trigger - gamepad1.left_trigger);
         if(gamepad1.right_bumper){
             intakeBack.setPower(-1);
         } else if (gamepad1.left_bumper) {

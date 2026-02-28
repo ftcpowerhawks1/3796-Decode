@@ -6,20 +6,22 @@ import com.pedropathing.paths.PathChain;
 import com.pedropathing.util.Timer;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
-
+import com.qualcomm.robotcore.hardware.CRServo;
 import org.firstinspires.ftc.teamcode.charlie.chuDrive.packages.aimCode;
 import org.firstinspires.ftc.teamcode.charlie.chuDrive.packages.mecanumDrive;
 import org.firstinspires.ftc.teamcode.charlie.chuDrive.packages.shooterPIDF;
 
 @Autonomous
 public class blehue extends OpMode {
-    double inPower = 0.45;
+    double inPower = 1;
 
     aimCode turnTableMotor = new aimCode();
     mecanumDrive drive = new mecanumDrive();
     shooterPIDF shoot = new shooterPIDF();
-    private DcMotor motorIntake;
+    private CRServo intakeFront;
+    private CRServo intakeBack;
+
+
     private Follower follower;
     private Timer pathTimer, opModeTimer;
 
@@ -53,7 +55,8 @@ public class blehue extends OpMode {
                 break;
             case SHOOT_POS_FINISH_POS:
                 if(pathTimer.getElapsedTimeSeconds() < 10 && pathTimer.getElapsedTimeSeconds() > 2){
-                    motorIntake.setPower(inPower);
+                    intakeFront.setPower(inPower);
+                    intakeBack.setPower(-inPower);
                 }
                 if(!follower.isBusy() && pathTimer.getElapsedTimeSeconds() > 10) {
                     follower.followPath(driveShootPoseReadyPose, true);
@@ -78,7 +81,8 @@ public class blehue extends OpMode {
     @Override
     public void init() {
         telemetry.addData("InPower", inPower);
-        motorIntake = hardwareMap.get(DcMotor.class, "motorIntake");
+        intakeFront = hardwareMap.get(CRServo.class, "frontServo");
+        intakeBack = hardwareMap.get(CRServo.class, "backServo");
         drive.init(hardwareMap);
         //MODE = 1 BLUE || MODE = 2 RED
         shoot.init(hardwareMap,1);

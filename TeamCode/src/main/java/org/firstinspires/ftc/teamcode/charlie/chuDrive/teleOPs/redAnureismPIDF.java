@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.charlie.chuDrive.packages.aimCode;
 import org.firstinspires.ftc.teamcode.charlie.chuDrive.packages.mecanumDrive;
 import org.firstinspires.ftc.teamcode.charlie.chuDrive.packages.shooterPIDF;
 
-@TeleOp
+//@TeleOp
 public class redAnureismPIDF extends OpMode {
     // Innie thing and outie thing motors
     private DcMotor intake;     // Pulls artifacts in
