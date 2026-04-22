@@ -9,7 +9,7 @@ import org.firstinspires.ftc.teamcode.charlie.chuDrive.packages.mecanumDrive;
 import org.firstinspires.ftc.teamcode.charlie.chuDrive.packages.shooterPIDF;
 
 @TeleOp
-public class newPIDFRed extends OpMode {
+public class    newPIDFRed extends OpMode {
     // Innie thing and out thing motors
     private CRServo intakeFront;     // Pulls artifacts in
     private CRServo intakeBack;
@@ -43,11 +43,13 @@ public class newPIDFRed extends OpMode {
         double forward = gamepad1.left_stick_y;
         double strafe = -gamepad1.left_stick_x;
         double rotate = -gamepad1.right_stick_x;
+        telemetry.addData("trig", gamepad1.right_trigger - gamepad1.left_trigger);
         intakeFront.setPower(gamepad1.right_trigger - gamepad1.left_trigger);
         if(gamepad1.right_bumper){
             intakeBack.setPower(-1);
         } else if (gamepad1.left_bumper) {
             intakeBack.setPower(1);
+            
         } else {
             intakeBack.setPower(0);
         }
